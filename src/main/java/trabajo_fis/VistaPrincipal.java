@@ -9,11 +9,14 @@ import java.util.Scanner;
 
 import trabajo_fis.usuarios.logica.ControladorUsuario;
 import trabajo_fis.usuarios.logica.IControladorUsuario;
+import trabajo_fis.usuarios.factory.*;
 
 public class VistaPrincipal {
 	private IVistaUsuarios vistaUsuarios = new VistaUsuarios();
 	private IVistaLoginRegistro vistaLoginRegistro = new VistaLoginRegistro();
 	private IControladorUsuario interfazControladorUsuario = new ControladorUsuario();
+	private ICreadorUsuarios factoria = new CreadorUsuario();
+
 
 	public static void main(String[] args) {
 		VistaPrincipal vistaPrincipal = new VistaPrincipal();
@@ -36,7 +39,7 @@ public class VistaPrincipal {
 		if (respuesta.equals("iniciar")) {
 			vistaLoginRegistro.iniciarSesion();
 		} else if (respuesta.equals("registrarse")) {
-			vistaLoginRegistro.registrarse();
+			vistaLoginRegistro.registrarse(factoria);
 		}
 	}
 	
