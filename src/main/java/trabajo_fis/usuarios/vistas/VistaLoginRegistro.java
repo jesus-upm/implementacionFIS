@@ -7,6 +7,8 @@ import trabajo_fis.usuarios.logica.IAutenticable;
 import trabajo_fis.usuarios.factory.ICreadorUsuarios;
 import trabajo_fis.usuarios.logica.ControladorUsuario;
 
+import static java.lang.Integer.parseInt;
+
 public class VistaLoginRegistro implements IVistaLoginRegistro {
    private IAutenticable autenticable = new ControladorUsuario();
 
@@ -43,7 +45,17 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
 
       do {
 
-         int opcion = Integer.parseInt(sc.nextLine());
+         int opcion = -1;
+
+         while (opcion==-1) {
+            System.out.print("Introduce un número: ");
+
+            try {
+               opcion = Integer.parseInt(sc.nextLine());
+            } catch (NumberFormatException e) {
+               System.out.println("❌ Debes introducir un número válido");
+            }
+         }
 
 
          switch (opcion) {
@@ -62,7 +74,7 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
             default:
                System.out.println("Opción inválida");
          }
-      }while (datos.containsKey("tipoUsuario"));
+      }while (datos.isEmpty());
 
       // Datos comunes
       System.out.print("Nick usuario: ");

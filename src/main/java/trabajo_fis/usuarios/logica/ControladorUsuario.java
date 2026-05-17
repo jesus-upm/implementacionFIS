@@ -126,9 +126,8 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable {
 
       if (password.length() < 12) return false;
 
-      return password.matches(
-              "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).+$"
-      );
+      return password != null &&
+              password.matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d).{12,}$");
    }
 
    private boolean validarNick(String nick) {
@@ -155,7 +154,7 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable {
       List<String> palabras = new ArrayList<>();
 
       try (BufferedReader br = new BufferedReader(
-              new FileReader("blacklist.txt"))) {
+              new FileReader("src/main/java/trabajo_fis/blacklist.txt"))) {
 
          String linea;
 
