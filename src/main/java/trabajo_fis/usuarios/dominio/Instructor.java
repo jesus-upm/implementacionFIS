@@ -20,4 +20,9 @@ public class Instructor extends UsuarioDNI {
    public void darDeBajaInstructor() {
 
    }   
+   
+   @Override
+   public TipoUsuario getTipoUsuario() {
+       return TipoUsuario.instructor;
+   }
 }

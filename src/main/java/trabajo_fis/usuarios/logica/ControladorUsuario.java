@@ -15,7 +15,7 @@ import trabajo_fis.usuarios.factory.ICreadorUsuarios;
 import trabajo_fis.usuarios.persistencia.IPersistenciaUsuarios;
 import trabajo_fis.usuarios.persistencia.PersistenciaUsuarios;
 
-public class ControladorUsuario implements IControladorUsuario, IAutenticable {
+public class ControladorUsuario implements IControladorUsuario, IAutenticable, IObtenerSesion {
    private List<Usuario> usuarios;
    private Usuario usuarioLogueado;
 
@@ -23,6 +23,11 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable {
 
    public ControladorUsuario() {
       usuarios = persistenciaUsuarios.cargarTodos();
+   }
+   
+   @Override
+   public Usuario getSesionActual() {
+	return usuarioLogueado;
    }
 
    @Override
@@ -175,4 +180,6 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable {
 
       return palabras;
    }
+
+
 }

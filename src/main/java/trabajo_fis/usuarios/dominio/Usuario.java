@@ -52,4 +52,10 @@ public class Usuario {
    public String toString() {
       return nickUsuario + "," + nombreCompleto + "," + email + "," + contraseña;
    }
+   
+   public TipoUsuario getTipoUsuario() {
+	   
+	   return null;
+   };
+   
 }
