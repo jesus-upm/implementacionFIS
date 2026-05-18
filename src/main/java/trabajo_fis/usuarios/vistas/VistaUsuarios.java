@@ -31,7 +31,7 @@ public class VistaUsuarios implements IVistaUsuarios {
 
    @Override
    public void altaInstructor() {
-      // TODO Auto-generated method stub
+      
       
    }
 
