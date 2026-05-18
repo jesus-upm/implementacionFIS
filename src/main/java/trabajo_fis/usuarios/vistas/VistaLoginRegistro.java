@@ -27,9 +27,8 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
       System.out.println("Introduce tu contraseña:");
       String contrasena = scanner.nextLine();
 
-      boolean exitoso = autenticable.iniciarSesion(email, contrasena);
 
-      if (exitoso) {
+      if ( autenticable.iniciarSesion(email, contrasena)) {
          System.out.println("Ya has iniciado sesión.");
       } else {
          System.out.println("Correo electrónico o contraseña incorrectos.");

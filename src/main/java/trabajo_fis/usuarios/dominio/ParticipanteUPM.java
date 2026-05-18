@@ -14,4 +14,5 @@ public class ParticipanteUPM extends ParticipanteExterno {
    public void setRolUPM(String rolUPM) {
       this.rolUPM = rolUPM;
    }
+   
 }

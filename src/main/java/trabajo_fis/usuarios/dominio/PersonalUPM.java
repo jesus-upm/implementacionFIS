@@ -25,4 +25,9 @@ public class PersonalUPM extends ParticipanteUPM {
    public void setEsPDI(boolean esPDI) {
       this.esPDI = esPDI;
    }
+   
+   @Override
+   public TipoUsuario getTipoUsuario() {
+       return TipoUsuario.personalUPM;
+   }
 }
