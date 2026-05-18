@@ -10,7 +10,12 @@ import trabajo_fis.usuarios.logica.ControladorUsuario;
 import static java.lang.Integer.parseInt;
 
 public class VistaLoginRegistro implements IVistaLoginRegistro {
-   private IAutenticable autenticable = new ControladorUsuario();
+   private IAutenticable autenticable;
+
+
+   public VistaLoginRegistro(IAutenticable autenticable) {
+      this.autenticable = autenticable;
+   }
 
    @Override
    public void iniciarSesion() {

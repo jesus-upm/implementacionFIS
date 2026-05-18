@@ -1,5 +1,6 @@
 package trabajo_fis;
 
+import trabajo_fis.usuarios.logica.IAutenticable;
 import trabajo_fis.usuarios.vistas.IVistaLoginRegistro;
 import trabajo_fis.usuarios.vistas.IVistaUsuarios;
 import trabajo_fis.usuarios.vistas.VistaLoginRegistro;
@@ -12,9 +13,11 @@ import trabajo_fis.usuarios.logica.IControladorUsuario;
 import trabajo_fis.usuarios.factory.*;
 
 public class VistaPrincipal {
-	private IVistaUsuarios vistaUsuarios = new VistaUsuarios();
-	private IVistaLoginRegistro vistaLoginRegistro = new VistaLoginRegistro();
-	private IControladorUsuario interfazControladorUsuario = new ControladorUsuario();
+	private ControladorUsuario c = new ControladorUsuario();
+	private IControladorUsuario interfazControladorUsuario = c;
+	private IAutenticable interfazAutenticable = c;
+	private IVistaLoginRegistro vistaLoginRegistro = new VistaLoginRegistro(interfazAutenticable);
+	private IVistaUsuarios vistaUsuarios = new VistaUsuarios(interfazControladorUsuario);
 	private ICreadorUsuarios factoria = new CreadorUsuario();
 
 

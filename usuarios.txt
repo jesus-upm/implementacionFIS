@@ -1,3 +1,10 @@
 
 trabajo_fis.usuarios.dominio.ParticipanteExterno,a,b,c,d,e,f
 trabajo_fis.usuarios.dominio.Instructor,oscar,oscar,oscar,HolaMundoSeguro123
+trabajo_fis.usuarios.dominio.ParticipanteExterno,oscar,oscar,oscar.lencero,ProyectoDeClase2025B,904632306,5210
+trabajo_fis.usuarios.dominio.EstudianteUPM,oscar,osca,oscsar,HolaMundoSeguro123,asdasdasd,tuvi
+trabajo_fis.usuarios.dominio.Instructor,oscar,oscar,oscars,Lencero080910
+trabajo_fis.usuarios.dominio.EstudianteUPM,oscar,oscar,oscar,Lencero080910,04866005,tuvi
+trabajo_fis.usuarios.dominio.Instructor,OSCAR,oscar,oscar,Lencero0809101
+trabajo_fis.usuarios.dominio.ParticipanteExterno,oscar,oscar,oscar,Lencero080910,adsasd,aadasd
+trabajo_fis.usuarios.dominio.Instructor,oscar,oscar,oscar,Lencero080910520

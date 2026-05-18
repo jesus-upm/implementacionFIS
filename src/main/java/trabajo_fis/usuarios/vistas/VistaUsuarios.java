@@ -5,6 +5,10 @@ import trabajo_fis.usuarios.logica.IControladorUsuario;
 public class VistaUsuarios implements IVistaUsuarios {
    private IControladorUsuario iControladorUsuario;
 
+   public VistaUsuarios(IControladorUsuario iControladorUsuario) {
+      this.iControladorUsuario = iControladorUsuario;
+   }
+
    @Override
    public void mostrarPreferenciaArtistica() {
       String preferencia = iControladorUsuario.getPreferenciaArtistica();

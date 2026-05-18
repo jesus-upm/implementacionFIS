@@ -56,8 +56,7 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable {
          return;
       }
 
-      if (datos.get("correoElectronico") == null ||
-              datos.get("correoElectronico").isEmpty()) {
+      if (comprobarCorreo(datos.get("correoElectronico"))) {
          System.out.println("Error: correo inválido");
          return;
       }
@@ -83,14 +82,29 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable {
          return;
       }
 
-
+      usuarioLogueado=usuarioRegistrado;
       persistenciaUsuarios.insertar(usuarioRegistrado);
       usuarios.add(usuarioRegistrado);
-      usuarioLogueado=usuarioRegistrado;
 
       System.out.println("Usuario registrado correctamente: " + tipo);
 
    }
+
+   public boolean comprobarCorreo(String correo) {
+      if(correo == null ||
+              correo.isEmpty()){
+         return true;
+      }
+      for (Usuario usuario : usuarios) {
+         if (usuario.getEmail().equalsIgnoreCase(correo)) {
+            return true;
+         }
+      }
+
+      return false;
+   }
+
+
    private boolean validarCamposPorTipo(String tipo,
                                         HashMap<String, String> datos) {
 
