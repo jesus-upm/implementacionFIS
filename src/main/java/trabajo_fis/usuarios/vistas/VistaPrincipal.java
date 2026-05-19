@@ -106,7 +106,7 @@ public class VistaPrincipal {
 		}else if(tu.equals(TipoUsuario.estudianteUPM)|| tu.equals(TipoUsuario.personalUPM) || tu.equals(TipoUsuario.participanteExterno)) {
 			
 			do {
-				iv.mostrarPreferenciaArtistica();
+				iVistaU.mostrarPreferenciaArtistica();
 				
 				System.out.println("¿Que deseas realizar? Introduce el número de la opción que desees:\n"
 						+ "1. Modificar preferencias artisticas\n"
