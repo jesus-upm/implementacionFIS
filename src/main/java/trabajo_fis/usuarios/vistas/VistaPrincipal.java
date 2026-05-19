@@ -5,15 +5,33 @@ import java.util.Scanner;
 import trabajo_fis.usuarios.dominio.TipoUsuario;
 import trabajo_fis.usuarios.dominio.Usuario;
 import trabajo_fis.usuarios.factory.*;
+import trabajo_fis.usuarios.logica.ControladorUsuario;
+import trabajo_fis.usuarios.logica.IControladorUsuario;
+
+import trabajo_fis.usuarios.logica.IAutenticable;
 import trabajo_fis.usuarios.logica.IObtenerSesion;
 
 public class VistaPrincipal {
 	
 	private IObtenerSesion sesionActual;
+	private IVistaLoginRegistro iVistaLR;
+	private IVistaUsuarios iVistaU;
+	private ICreadorUsuarios iCreadorU;
+	
+	public VistaPrincipal() {
+		ControladorUsuario cu= new ControladorUsuario();
+		
+		IAutenticable iAu=cu;
+		iVistaLR= new VistaLoginRegistro(iAu);
+		sesionActual= cu;
+		IControladorUsuario iCu= cu;
+		iVistaU = new VistaUsuarios(iCu);
+		iCreadorU= new CreadorUsuario();
+	}
+	
 	
 	public void mostrarVistaLoginRegistro() {
 		
-		/*IVistaLoginRegistro vlr= new VistaLoginRegistro();
 		String inputUsuario="";
 		
 		Scanner sc = new Scanner(System.in);
@@ -26,26 +44,24 @@ public class VistaPrincipal {
 		
 
 		if(inputUsuario.equals("1")) {
-	        vlr.iniciarSesion();
-	        mostrarVistaUsuarios();
+	        iVistaLR.iniciarSesion();
+	        if(sesionActual.getSesionActual()!=null) {
+		        mostrarVistaUsuarios();
+	        }
 			
 		}else if (inputUsuario.equals("2")) {
-			
-			ICreadorUsuarios icu= new CreadorUsuario();
-			
-			vlr.registrarse(icu);   
+						
+			iVistaLR.registrarse(iCreadorU);   
 			
 		} else {
 		    System.out.println("Opción no válida");
-		}*/
+		}
 		
 	}
 	
-	public void mostrarVistaUsuarios() {/*
+	public void mostrarVistaUsuarios() {
 		
-		IVistaUsuarios iv= new VistaUsuarios();
-		Usuario u= sesionActual.getSesionActual();
-		TipoUsuario tu=u.getTipoUsuario();
+		TipoUsuario tu=sesionActual.getSesionActual().getTipoUsuario();
 		
 		String inputUsuario="";
 		Scanner sc = new Scanner(System.in);
@@ -65,16 +81,16 @@ public class VistaPrincipal {
 				
 					switch(inputUsuario) {
 						
-						case "1":iv.altaInstructor();
+						case "1":iVistaU.altaInstructor(iCreadorU);
 							break;
 							
-						case "2":iv.bajaInstructor();
+						case "2":iVistaU.bajaInstructor();
 						break;
 						
-						case "3":iv.mostrarInstructor();
+						case "3":iVistaU.mostrarInstructor();
 						break;
 						
-						case "4":iv.mostrarParticipante();
+						case "4":iVistaU.mostrarParticipante();
 						break;
 						
 						case "5":cerrarSesion();
@@ -101,10 +117,10 @@ public class VistaPrincipal {
 				
 				switch(inputUsuario) {
 					
-					case "1":iv.cambiarPreferenciaArtistica();
+					case "1":iVistaU.cambiarPreferenciaArtistica();
 						break;
 						
-					case "2":iv.darseDeBaja();
+					case "2":iVistaU.darseDeBaja();
 					break;
 					
 					case "3":cerrarSesion();
@@ -117,7 +133,7 @@ public class VistaPrincipal {
 				
 			}while(!inputUsuario.equals("3"));
 		}
-		*/
+		
 		
 	}
 	public void cerrarSesion() {

@@ -1,12 +1,14 @@
 package trabajo_fis.usuarios.dominio;
 
 import org.mindrot.jbcrypt.BCrypt;
+import java.util.List;
 
 public class Usuario {
    private String nickUsuario;
    private String nombreCompleto;
    private String email;
    private String contraseña;
+   private List<PreferenciasArtisticas> preferencias;
 
    public Usuario(String nickUsuario, String nombreCompleto, String email, String contraseña) {
       this.nickUsuario = nickUsuario;
@@ -14,6 +16,27 @@ public class Usuario {
       this.email = email;
       this.contraseña = contraseña;
    }
+   
+   public boolean añadirPreferencia(PreferenciasArtisticas p) {
+       if (preferencias.size() >= 3) {
+           return false; // No se puede añadir más
+       }
+       preferencias.add(p);
+       return true;
+   }
+
+   public boolean eliminarPreferencia(PreferenciasArtisticas p) {
+       return preferencias.remove(p);
+   }
+   
+   public boolean modificarPreferencia(int indice, int nuevoNExp) {
+	    if (indice < 0 || indice >= preferencias.size()) {
+	        return false; // índice inválido
+	    }
+
+	    preferencias.get(indice).cambiarPreferencia(nuevoNExp);
+	    return true;
+	}
 
    public boolean comprobarUsuario(String nick, String contraseña) {
       return this.nickUsuario.equals(nick) && BCrypt.checkpw(contraseña, this.contraseña);

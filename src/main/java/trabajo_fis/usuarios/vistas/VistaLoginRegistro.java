@@ -30,6 +30,8 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
 
       if ( autenticable.iniciarSesion(email, contrasena)) {
          System.out.println("Ya has iniciado sesión.");
+         
+         
       } else {
          System.out.println("Correo electrónico o contraseña incorrectos.");
       }

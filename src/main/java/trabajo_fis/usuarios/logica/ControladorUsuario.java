@@ -48,6 +48,7 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
       for (Usuario usuario : usuarios) {
          if (usuario.comprobarUsuario(email, contrasena)) {
             usuarioLogueado = usuario;
+            
             return true;
          }  
       }
