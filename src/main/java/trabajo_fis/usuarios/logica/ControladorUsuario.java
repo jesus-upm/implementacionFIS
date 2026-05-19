@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
+import org.mindrot.jbcrypt.BCrypt;
 import trabajo_fis.usuarios.dominio.ParticipanteExterno;
 import trabajo_fis.usuarios.dominio.TipoUsuario;
 import trabajo_fis.usuarios.dominio.Usuario;
@@ -130,6 +131,9 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
          System.out.println("Error: campos específicos inválidos");
          return null;
       }
+
+      String contraseñaHash = BCrypt.hashpw(datos.get("contraseña"), BCrypt.gensalt());
+      datos.put("contraseña",contraseñaHash);
 
 
       Usuario usuarioRegistrado = factoria.crearUsuario(datos);

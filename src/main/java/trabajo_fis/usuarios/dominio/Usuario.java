@@ -1,5 +1,7 @@
 package trabajo_fis.usuarios.dominio;
 
+import org.mindrot.jbcrypt.BCrypt;
+
 public class Usuario {
    private String nickUsuario;
    private String nombreCompleto;
@@ -14,7 +16,7 @@ public class Usuario {
    }
 
    public boolean comprobarUsuario(String nick, String contraseña) {
-      return this.nickUsuario.equals(nick) && this.contraseña.equals(contraseña);
+      return this.nickUsuario.equals(nick) && BCrypt.checkpw(contraseña, this.contraseña);
    }
 
    public String getNickUsuario() {
