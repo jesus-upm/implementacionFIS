@@ -13,7 +13,7 @@ public class VistaPrincipal {
 	
 	public void mostrarVistaLoginRegistro() {
 		
-		IVistaLoginRegistro vlr= new VistaLoginRegistro();
+		/*IVistaLoginRegistro vlr= new VistaLoginRegistro();
 		String inputUsuario="";
 		
 		Scanner sc = new Scanner(System.in);
@@ -37,11 +37,11 @@ public class VistaPrincipal {
 			
 		} else {
 		    System.out.println("Opción no válida");
-		}
+		}*/
 		
 	}
 	
-	public void mostrarVistaUsuarios() {
+	public void mostrarVistaUsuarios() {/*
 		
 		IVistaUsuarios iv= new VistaUsuarios();
 		Usuario u= sesionActual.getSesionActual();
@@ -117,7 +117,7 @@ public class VistaPrincipal {
 				
 			}while(!inputUsuario.equals("3"));
 		}
-		
+		*/
 		
 	}
 	public void cerrarSesion() {

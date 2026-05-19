@@ -57,7 +57,7 @@ public class VistaPrincipal {
 			case 1 -> vistaUsuarios.mostrarPreferenciaArtistica();
 			case 2 -> vistaUsuarios.cambiarPreferenciaArtistica();
 			case 3 -> vistaUsuarios.darseDeBaja();
-			case 4 -> vistaUsuarios.altaInstructor();
+			case 4 -> vistaUsuarios.altaInstructor(factoria);
 			case 5 -> vistaUsuarios.bajaInstructor();
 			case 6 -> vistaUsuarios.mostrarInstructor();
 			case 7 -> vistaUsuarios.mostrarParticipante();

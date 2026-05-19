@@ -6,9 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 import trabajo_fis.usuarios.dominio.ParticipanteExterno;
+import trabajo_fis.usuarios.dominio.TipoUsuario;
 import trabajo_fis.usuarios.dominio.Usuario;
 import trabajo_fis.usuarios.factory.CreadorUsuario;
 import trabajo_fis.usuarios.factory.ICreadorUsuarios;
@@ -51,38 +53,40 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
       return false;
    }
 
+   public boolean bajaInstructor(String correo){
+      Iterator<Usuario> iterator = usuarios.iterator();
+
+      while (iterator.hasNext()) {
+         Usuario usuario = iterator.next();
+
+         if (usuario.getEmail().equalsIgnoreCase(correo)
+                 && usuario.getTipoUsuario().equals(TipoUsuario.instructor)) {
+            usuarios.remove(usuario);
+            persistenciaUsuarios.borrar(correo);
+            return true;
+         }
+      }
+
+      return false;
+   }
+
+   public void altaInstructor(ICreadorUsuarios factoria, HashMap<String, String> datos){
+      Usuario usuarioRegistrado = crearUsuario(factoria,datos);
+      if (usuarioRegistrado == null) {
+         System.out.println("Error: no se pudo crear el instructor");
+         return;
+      }
+      persistenciaUsuarios.insertar(usuarioRegistrado);
+      usuarios.add(usuarioRegistrado);
+      System.out.println("Instructor creado correctamente ");
+
+
+   }
+
    @Override
    public void registrarse(ICreadorUsuarios factoria, HashMap<String, String> datos) {
-      if (!validarNick(datos.get("nickUsuario"))) {
-         System.out.println("Error: nick inválido");
-         return;
-      }
 
-      if (!validarContraseña(datos.get("contraseña"))) {
-         System.out.println("Error: contraseña inválida");
-         return;
-      }
-
-      if (comprobarCorreo(datos.get("correoElectronico"))) {
-         System.out.println("Error: correo inválido");
-         return;
-      }
-
-      if (datos.get("DNI") == null || datos.get("DNI").isEmpty()) {
-         System.out.println("Error: DNI inválido");
-         return;
-      }
-
-      // 2. VALIDACIÓN POR TIPO
-      String tipo = datos.get("tipoUsuario");
-
-      if (!validarCamposPorTipo(tipo, datos)) {
-         System.out.println("Error: campos específicos inválidos");
-         return;
-      }
-
-
-      Usuario usuarioRegistrado = factoria.crearUsuario(datos);
+      Usuario usuarioRegistrado = crearUsuario(factoria,datos);
 
       if (usuarioRegistrado == null) {
          System.out.println("Error: no se pudo crear el usuario");
@@ -93,8 +97,43 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
       persistenciaUsuarios.insertar(usuarioRegistrado);
       usuarios.add(usuarioRegistrado);
 
-      System.out.println("Usuario registrado correctamente: " + tipo);
+      System.out.println("Usuario registrado correctamente: " + datos.get("tipoUsuario"));
 
+   }
+
+
+   private Usuario crearUsuario(ICreadorUsuarios factoria, HashMap<String, String> datos){
+      if (!validarNick(datos.get("nickUsuario"))) {
+         System.out.println("Error: nick inválido");
+         return null;
+      }
+
+      if (!validarContraseña(datos.get("contraseña"))) {
+         System.out.println("Error: contraseña inválida");
+         return null;
+      }
+
+      if (comprobarCorreo(datos.get("correoElectronico"))) {
+         System.out.println("Error: correo inválido");
+         return null;
+      }
+
+      if (datos.get("DNI") == null || datos.get("DNI").isEmpty()) {
+         System.out.println("Error: DNI inválido");
+         return null;
+      }
+
+      // 2. VALIDACIÓN POR TIPO
+      String tipo = datos.get("tipoUsuario");
+
+      if (!validarCamposPorTipo(tipo, datos)) {
+         System.out.println("Error: campos específicos inválidos");
+         return null;
+      }
+
+
+      Usuario usuarioRegistrado = factoria.crearUsuario(datos);
+      return usuarioRegistrado;
    }
 
    public boolean comprobarCorreo(String correo) {
