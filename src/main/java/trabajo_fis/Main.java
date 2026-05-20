@@ -4,6 +4,7 @@ import trabajo_fis.usuarios.vistas.*;
 
 public class Main {
 	public static void main(String[] args) {
-		VistaPrincipal vp= new VistaPrincipal();
+		new VistaPrincipal();
+		//TODO: DAR DE ALTA Y BAJA INSTRUCTOR
 	}
 }

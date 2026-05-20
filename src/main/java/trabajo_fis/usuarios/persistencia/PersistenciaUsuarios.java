@@ -63,7 +63,7 @@ public class PersistenciaUsuarios implements IPersistenciaUsuarios {
    @Override
    public Usuario seleccionar(String email) {
       System.out.println("Usuario seleccionado con email: " + email);
-      return new Usuario("nick", "Nombre Completo", email, "contraseña");
+      return null;
    }
 
    @Override

@@ -8,6 +8,7 @@ public class EstudianteUPM extends ParticipanteUPM {
       this.numMatricula = numMatricula;
    }
 
+   public void setNumMatricula(String numMatricula) {this.numMatricula = numMatricula; }
    public String getNumMatricula() {
       return numMatricula;
    }

@@ -11,8 +11,11 @@ public abstract class UsuarioDNI extends Usuario {
    public String getDNI() {
       return DNI;
    }
-
    public void setDNI(String DNI) {
       this.DNI = DNI;
-   }   
+   }
+
+   public String toString() {
+      return super.toString()+";DNI:"+getDNI();
+   }
 }
