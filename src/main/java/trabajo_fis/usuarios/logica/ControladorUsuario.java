@@ -21,8 +21,8 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
 
    private IPersistenciaUsuarios persistenciaUsuarios = new PersistenciaUsuarios();
 
-   public ControladorUsuario() {
-      usuarios = persistenciaUsuarios.cargarTodos();
+   public ControladorUsuario(ICreadorUsuarios factoria) {
+      usuarios = persistenciaUsuarios.cargarTodos(factoria);
    }
    
    @Override
