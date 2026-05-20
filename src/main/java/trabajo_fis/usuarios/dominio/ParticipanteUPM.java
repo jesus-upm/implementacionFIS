@@ -8,6 +8,6 @@ public class ParticipanteUPM extends ParticipanteExterno {
 
    @Override
    public String toString() {
-      return "nick:"+getNickUsuario()+";nombre:"+getNombreCompleto()+";email:"+getEmail()+";contraseña:"+getContrasena()+";DNI:"+getDNI()+";tarjetaBancaria:"+getTarjetaBancaria();
+      return super.toString()+";DNI:"+getDNI()+";tarjetaBancaria:"+getTarjetaBancaria();
    }
 }
