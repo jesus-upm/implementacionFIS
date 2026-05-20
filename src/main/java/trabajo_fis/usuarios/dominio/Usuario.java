@@ -7,14 +7,14 @@ public class Usuario {
    private String nickUsuario;
    private String nombreCompleto;
    private String email;
-   private String contraseña;
+   private String contrasena;
    private List<PreferenciasArtisticas> preferencias;
 
-   public Usuario(String nickUsuario, String nombreCompleto, String email, String contraseña) {
+   public Usuario(String nickUsuario, String nombreCompleto, String email, String contrasena) {
       this.nickUsuario = nickUsuario;
       this.nombreCompleto = nombreCompleto;
       this.email = email;
-      this.contraseña = contraseña;
+      this.contrasena = contrasena;
    }
    
    public boolean añadirPreferencia(PreferenciasArtisticas p) {
@@ -39,7 +39,7 @@ public class Usuario {
 	}
 
    public boolean comprobarUsuario(String nick, String contraseña) {
-      return this.nickUsuario.equals(nick) && BCrypt.checkpw(contraseña, this.contraseña);
+      return this.nickUsuario.equals(nick) && BCrypt.checkpw(contraseña, this.contrasena);
    }
 
    public String getNickUsuario() {
@@ -55,7 +55,7 @@ public class Usuario {
    }
 
    public String getContrasena() {
-      return contraseña;
+      return contrasena;
    }
 
    public void setNickUsuario(String nickUsuario) {
@@ -70,12 +70,12 @@ public class Usuario {
       this.email = email;
    }
 
-   public void setContrasena(String contraseña) {
-      this.contraseña = contraseña;
+   public void setContrasena(String contrasena) {
+      this.contrasena = contrasena;
    }
 
    public String toString() {
-      return nickUsuario + "," + nombreCompleto + "," + email + "," + contraseña;
+      return nickUsuario + "," + nombreCompleto + "," + email + "," + contrasena;
    }
    
 }
