@@ -28,9 +28,5 @@ public class ParticipanteExterno extends UsuarioDNI {
    public String toString() {
       return getNickUsuario() + "," + getNombreCompleto() + "," + getEmail() + "," + getContrasena() + "," + getDNI() + "," + getTarjetaBancaria();
    }
-   
-   @Override
-   public TipoUsuario getTipoUsuario() {
-       return TipoUsuario.participanteExterno;
-   }
+
 }

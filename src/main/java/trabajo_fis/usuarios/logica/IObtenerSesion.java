@@ -4,5 +4,5 @@ import trabajo_fis.usuarios.dominio.Usuario;
 
 public interface IObtenerSesion {
 
-	public Usuario getSesionActual();
+	public String getSesionActual();
 }

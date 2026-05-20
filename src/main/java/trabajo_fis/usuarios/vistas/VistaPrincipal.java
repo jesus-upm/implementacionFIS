@@ -2,8 +2,7 @@ package trabajo_fis.usuarios.vistas;
 
 import java.util.Scanner;
 
-import trabajo_fis.usuarios.dominio.TipoUsuario;
-import trabajo_fis.usuarios.dominio.Usuario;
+import trabajo_fis.usuarios.dominio.EstudianteUPM;
 import trabajo_fis.usuarios.factory.*;
 import trabajo_fis.usuarios.logica.ControladorUsuario;
 import trabajo_fis.usuarios.logica.IControladorUsuario;
@@ -17,6 +16,7 @@ public class VistaPrincipal {
 	private IVistaLoginRegistro iVistaLR;
 	private IVistaUsuarios iVistaU;
 	private ICreadorUsuarios iCreadorU;
+
 	
 	public VistaPrincipal() {
 		ControladorUsuario cu= new ControladorUsuario();
@@ -27,6 +27,14 @@ public class VistaPrincipal {
 		IControladorUsuario iCu= cu;
 		iVistaU = new VistaUsuarios(iCu);
 		iCreadorU= new CreadorUsuario();
+
+		while (true){
+			if (sesionActual.getSesionActual()==null) {
+				mostrarVistaLoginRegistro();
+			}else {
+				mostrarVistaUsuarios();
+			}
+		}
 	}
 	
 	
@@ -61,13 +69,11 @@ public class VistaPrincipal {
 	
 	public void mostrarVistaUsuarios() {
 		
-		TipoUsuario tu=sesionActual.getSesionActual().getTipoUsuario();
-		
 		String inputUsuario="";
 		Scanner sc = new Scanner(System.in);
 		
 		
-		if(tu.equals(TipoUsuario.administrador)) {
+		if(sesionActual.getSesionActual()=="Administrador") {
 		
 			
 			do {			
@@ -103,7 +109,7 @@ public class VistaPrincipal {
 
 				}while(!inputUsuario.equals("3"));
 			
-		}else if(tu.equals(TipoUsuario.estudianteUPM)|| tu.equals(TipoUsuario.personalUPM) || tu.equals(TipoUsuario.participanteExterno)) {
+		}else if(sesionActual.getSesionActual()== "EstudianteUPM" || sesionActual.getSesionActual()=="Instructor" || sesionActual.getSesionActual()=="ParticipanteExterno") {
 			
 			do {
 				iVistaU.mostrarPreferenciaArtistica();

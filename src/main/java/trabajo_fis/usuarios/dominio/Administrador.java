@@ -21,9 +21,5 @@ public class Administrador extends Usuario {
    public void darDeBajaInstructor(Instructor instructor) {
 
    }
-   
-   @Override
-   public TipoUsuario getTipoUsuario() {
-       return TipoUsuario.administrador;
-   }
+
 }

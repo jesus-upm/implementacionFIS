@@ -7,9 +7,5 @@ public class EstudianteUPM extends ParticipanteUPM {
       super(nickUsuario, nombreCompleto, email, contraseña, DNI, tarjetaBancaria,rolUpm);
       this.numMatricula = numMatricula;
    }   
-   
-   @Override
-   public TipoUsuario getTipoUsuario() {
-       return TipoUsuario.estudianteUPM;
-   }
+
 }

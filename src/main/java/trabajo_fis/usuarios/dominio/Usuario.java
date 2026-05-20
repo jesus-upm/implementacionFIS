@@ -78,9 +78,4 @@ public class Usuario {
       return nickUsuario + "," + nombreCompleto + "," + email + "," + contraseña;
    }
    
-   public TipoUsuario getTipoUsuario() {
-	   
-	   return null;
-   };
-   
 }

@@ -10,10 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
-import trabajo_fis.usuarios.dominio.ParticipanteExterno;
-import trabajo_fis.usuarios.dominio.TipoUsuario;
 import trabajo_fis.usuarios.dominio.Usuario;
-import trabajo_fis.usuarios.factory.CreadorUsuario;
 import trabajo_fis.usuarios.factory.ICreadorUsuarios;
 import trabajo_fis.usuarios.persistencia.IPersistenciaUsuarios;
 import trabajo_fis.usuarios.persistencia.PersistenciaUsuarios;
@@ -29,8 +26,8 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
    }
    
    @Override
-   public Usuario getSesionActual() {
-	return usuarioLogueado;
+   public String getSesionActual() {
+      return (usuarioLogueado != null) ? usuarioLogueado.getClass().getSimpleName() : null;
    }
 
    @Override
@@ -62,7 +59,7 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
          Usuario usuario = iterator.next();
 
          if (usuario.getEmail().equalsIgnoreCase(correo)
-                 && usuario.getTipoUsuario().equals(TipoUsuario.instructor)) {
+                 && usuario.getClass().getSimpleName().equals("Instructor")) {
             usuarios.remove(usuario);
             persistenciaUsuarios.borrar(correo);
             return true;
@@ -219,7 +216,7 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
       List<String> palabras = new ArrayList<>();
 
       try (BufferedReader br = new BufferedReader(
-              new FileReader("src/main/java/trabajo_fis/blacklist.txt"))) {
+              new FileReader("src/Main/java/trabajo_fis/blacklist.txt"))) {
 
          String linea;
 

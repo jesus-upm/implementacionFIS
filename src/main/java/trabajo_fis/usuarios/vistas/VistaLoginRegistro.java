@@ -44,37 +44,33 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
       HashMap<String, String> datos = new HashMap<>();
       System.out.println("=== REGISTRO DE USUARIO ===");
       System.out.println("Seleccione tipo de usuario:");
-      System.out.println("1. Instructor");
-      System.out.println("2. Participante Externo");
-      System.out.println("3. Estudiante UPM");
-      System.out.println("4. Personal UPM");
+      System.out.println("1. Participante Externo");
+      System.out.println("2. Estudiante UPM");
+      System.out.println("3. Personal UPM");
 
       do {
 
          int opcion = -1;
 
          while (opcion==-1) {
-            System.out.print("Introduce un número: ");
+            System.out.print("Introduce el número de la opción que quieras: ");
 
             try {
                opcion = Integer.parseInt(sc.nextLine());
             } catch (NumberFormatException e) {
-               System.out.println("❌ Debes introducir un número válido");
+               System.out.println("Debes introducir un número válido");
             }
          }
 
 
          switch (opcion) {
             case 1:
-               datos.put("tipoUsuario", "instructor");
-               break;
-            case 2:
                datos.put("tipoUsuario", "participanteExterno");
                break;
-            case 3:
+            case 2:
                datos.put("tipoUsuario", "estudianteUPM");
                break;
-            case 4:
+            case 3:
                datos.put("tipoUsuario", "personalUPM");
                break;
             default:
@@ -92,7 +88,7 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
       System.out.print("Correo electrónico: ");
       datos.put("correoElectronico", sc.nextLine());
 
-      System.out.print("Contraseña: ");
+      System.out.print("Contraseña(Debe tener 12 carácteres min, entre ellas una mayúscula y un número): ");
       datos.put("contraseña", sc.nextLine());
 
       System.out.print("DNI: ");
@@ -101,12 +97,7 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
       // Datos específicos
       String tipo = datos.get("tipoUsuario");
 
-      if (tipo.equals("instructor")) {
-
-         System.out.print("IBAN: ");
-         datos.put("IBAN", sc.nextLine());
-
-      } else if (tipo.equals("participanteExterno")) {
+      if (tipo.equals("participanteExterno")) {
 
          System.out.print("Tarjeta bancaria: ");
          datos.put("tarjetaBancaria", sc.nextLine());
