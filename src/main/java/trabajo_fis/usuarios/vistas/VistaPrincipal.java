@@ -19,14 +19,14 @@ public class VistaPrincipal {
 
 	
 	public VistaPrincipal() {
-		ControladorUsuario cu= new ControladorUsuario();
+		iCreadorU= new CreadorUsuario();
+		ControladorUsuario cu= new ControladorUsuario(iCreadorU);
 		
 		IAutenticable iAu=cu;
 		iVistaLR= new VistaLoginRegistro(iAu);
 		sesionActual= cu;
 		IControladorUsuario iCu= cu;
 		iVistaU = new VistaUsuarios(iCu);
-		iCreadorU= new CreadorUsuario();
 
 		while (true){
 			if (sesionActual.getSesionActual()==null) {
