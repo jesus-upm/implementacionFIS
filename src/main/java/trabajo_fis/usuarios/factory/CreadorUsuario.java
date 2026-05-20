@@ -47,7 +47,6 @@ public class CreadorUsuario implements ICreadorUsuarios {
                         datos.get("contraseña"),
                         datos.get("DNI"),
                         datos.get("tarjetaBancaria"),
-                        datos.get("rolUPM"),
                         datos.get("numMatricula")
                 );
 
@@ -59,9 +58,16 @@ public class CreadorUsuario implements ICreadorUsuarios {
                         datos.get("contraseña"),
                         datos.get("DNI"),
                         datos.get("tarjetaBancaria"),
-                        datos.get("rolUPM"),
                         LocalDate.parse(datos.get("fechaAntiguedad"), DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                         Boolean.parseBoolean(datos.get("esPDI"))
+                );
+            case "administrador" :
+                return new Administrador(
+                        datos.get("nickUsuario"),
+                        datos.get("nombreCompleto"),
+                        datos.get("correoElectronico"),
+                        datos.get("contraseña"),
+                        datos.get("telefono")
                 );
 
             default:

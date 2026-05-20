@@ -26,7 +26,9 @@ public class ParticipanteExterno extends UsuarioDNI {
    }
 
    public String toString() {
-      return getNickUsuario() + "," + getNombreCompleto() + "," + getEmail() + "," + getContrasena() + "," + getDNI() + "," + getTarjetaBancaria();
+
+      return super.toString()+";DNI:"+getDNI()+";tarjetaBancaria:"+getTarjetaBancaria();
    }
+
 
 }

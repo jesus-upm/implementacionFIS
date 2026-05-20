@@ -19,6 +19,10 @@ public class Instructor extends UsuarioDNI {
    }
    public void darDeBajaInstructor() {
 
-   }   
+   }
 
+   @Override
+   public String toString() {
+      return super.toString()+";DNI:"+getDNI()+";IBAN:"+getIBAN();
+   }
 }
