@@ -1,6 +1,5 @@
 package trabajo_fis.usuarios.vistas;
 
-import trabajo_fis.usuarios.factory.ICreadorUsuarios;
 import trabajo_fis.usuarios.logica.IControladorUsuario;
 
 import java.util.HashMap;
@@ -8,6 +7,7 @@ import java.util.Scanner;
 
 public class VistaUsuarios implements IVistaUsuarios {
    private IControladorUsuario iControladorUsuario;
+
 
    public VistaUsuarios(IControladorUsuario iControladorUsuario) {
       this.iControladorUsuario = iControladorUsuario;
@@ -43,12 +43,10 @@ public class VistaUsuarios implements IVistaUsuarios {
       else {
          System.out.println("Error en la eliminacion del instructor");
       }
-
-      
    }
 
    @Override
-   public void altaInstructor(ICreadorUsuarios factoria) {
+   public void altaInstructor() {
 
       Scanner sc = new Scanner(System.in);
       HashMap<String,String> datos = new HashMap<>();
@@ -73,8 +71,7 @@ public class VistaUsuarios implements IVistaUsuarios {
       System.out.print("IBAN: ");
       datos.put("IBAN", sc.nextLine());
 
-      iControladorUsuario.altaInstructor(factoria,datos);
-      
+      iControladorUsuario.altaInstructor(datos);
    }
 
    @Override

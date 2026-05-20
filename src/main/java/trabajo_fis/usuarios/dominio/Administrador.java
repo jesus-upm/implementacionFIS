@@ -14,4 +14,9 @@ public class Administrador extends Usuario {
    public void setnTelefono(String nTelefono) {
       this.nTelefono = nTelefono;
    }
+
+   @Override
+   public String toString() {
+      return super.toString()+";nTelefono;"+getnTelefono();
+   }
 }

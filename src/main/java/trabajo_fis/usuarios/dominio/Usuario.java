@@ -47,5 +47,5 @@ public abstract class Usuario {
    }
 
    @Override
-   public String toString() {return "nickUsuario;"+nickUsuario + "nombreCompleto;"+ nombreCompleto + "email;"+ email + "contrasena;"+contrasena;}
+   public String toString() {return ";nickUsuario;"+nickUsuario + ";nombreCompleto;"+ nombreCompleto + ";email;"+ email + ";contrasena;"+contrasena;}
 }

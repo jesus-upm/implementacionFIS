@@ -4,20 +4,21 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
-import java.lang.reflect.Constructor;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import trabajo_fis.usuarios.dominio.Usuario;
-import trabajo_fis.usuarios.factory.ICreadorUsuarios;
+import trabajo_fis.usuarios.factory.ICreadorUsuario;
 
 public class PersistenciaUsuarios implements IPersistenciaUsuarios {
    private static final String ARCHIVO = System.getProperty("user.dir") + File.separator + "usuarios.txt";
+   private ICreadorUsuario factoria;
+
+   public PersistenciaUsuarios(ICreadorUsuario factoria) { this.factoria = factoria; }
 
    @Override
-   public List<Usuario> cargarTodos(ICreadorUsuarios factoria) {
+   public List<Usuario> cargarTodos() {
       File file = new File(ARCHIVO);
       if (!file.exists()) return new ArrayList<>();
 
@@ -70,5 +71,4 @@ public class PersistenciaUsuarios implements IPersistenciaUsuarios {
    public void actualizar(Usuario usuario) {
       System.out.println("Usuario actualizado: " + usuario.getNickUsuario());
    }
-   
 }

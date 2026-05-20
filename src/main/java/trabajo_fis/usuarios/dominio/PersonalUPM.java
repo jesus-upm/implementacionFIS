@@ -28,6 +28,6 @@ public class PersonalUPM extends ParticipanteUPM {
 
    @Override
    public String toString() {
-      return super.toString()+";fechaAntiguedad:"+getFechaAntiguedad()+";esPDI:"+ getEsPDI();
+      return super.toString()+";fechaAntiguedad;"+getFechaAntiguedad()+";esPDI;"+ getEsPDI();
    }
 }

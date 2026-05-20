@@ -15,6 +15,6 @@ public class EstudianteUPM extends ParticipanteUPM {
 
    @Override
    public String toString() {
-      return super.toString()+";numMatricula:"+getNumMatricula();
+      return super.toString()+";numMatricula;"+getNumMatricula();
    }
 }

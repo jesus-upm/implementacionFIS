@@ -32,6 +32,6 @@ public class ParticipanteExterno extends UsuarioDNI {
    public void removePreferenciaArtistica(PreferenciaArtistica preferencia) {preferenciasArtisticas.remove(preferencia);}
 
    public String toString() {
-      return super.toString()+";tarjetaBancaria:"+getTarjetaBancaria();
+      return super.toString()+";tarjetaBancaria;"+getTarjetaBancaria();
    }
 }

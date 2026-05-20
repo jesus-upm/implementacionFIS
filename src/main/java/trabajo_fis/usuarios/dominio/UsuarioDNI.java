@@ -16,6 +16,6 @@ public abstract class UsuarioDNI extends Usuario {
    }
 
    public String toString() {
-      return super.toString()+";DNI:"+getDNI();
+      return super.toString()+";DNI;"+getDNI();
    }
 }
