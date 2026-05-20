@@ -17,9 +17,10 @@ public abstract class Usuario {
       this.contrasena = contrasena;
    }
 
-   public boolean comprobarUsuario(String nick, String contraseña) {
-      return this.nickUsuario.equals(nick) && BCrypt.checkpw(contraseña, this.contrasena);
+   public boolean comprobarUsuario(String email, String contraseña) {
+      return this.email.equals(email) && BCrypt.checkpw(contraseña, this.contrasena);
    }
+
 
    public String getNickUsuario() {
       return nickUsuario;
@@ -47,5 +48,5 @@ public abstract class Usuario {
    }
 
    @Override
-   public String toString() {return ";nickUsuario;"+nickUsuario + ";nombreCompleto;"+ nombreCompleto + ";email;"+ email + ";contrasena;"+contrasena;}
+   public String toString() {return ";nickUsuario;"+nickUsuario + ";nombreCompleto;"+ nombreCompleto + ";correoElectronico;"+ email + ";contraseña;"+contrasena;}
 }

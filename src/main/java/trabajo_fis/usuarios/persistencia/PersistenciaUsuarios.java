@@ -26,7 +26,9 @@ public class PersistenciaUsuarios implements IPersistenciaUsuarios {
       try (BufferedReader br = new BufferedReader(new FileReader(ARCHIVO))) {
          String linea;
          while ((linea = br.readLine()) != null) {
+            if (linea.trim().isEmpty()) continue;
             String[] partes = linea.split(";");
+
             HashMap<String, String> datos = new HashMap<>();
 
             for (int i = 0; i < partes.length - 1; i += 2) {
@@ -48,8 +50,10 @@ public class PersistenciaUsuarios implements IPersistenciaUsuarios {
    public void insertar(Usuario usuario) {
       try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARCHIVO, true))) {
          bw.newLine();
-         bw.write("tipoUsuario;"+usuario.getClass().getName());
-         bw.write(";");
+         String input = "trabajo_fis.usuarios.dominio.ParticipanteExterno";
+         String result = input.substring(input.lastIndexOf(".") + 1);
+         result = Character.toLowerCase(result.charAt(0)) + result.substring(1);
+         bw.write("tipoUsuario;"+result);
          bw.write(usuario.toString());
       } catch (Exception e) {
          System.out.println(e);

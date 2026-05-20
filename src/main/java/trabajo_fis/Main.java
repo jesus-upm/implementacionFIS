@@ -10,7 +10,7 @@ public class Main {
 		CreadorUsuario creadorUsuario = new CreadorUsuario();
 		ControladorUsuario controladorUsuario = new ControladorUsuario(creadorUsuario, new PersistenciaUsuarios(creadorUsuario));
 
-        new VistaPrincipal(controladorUsuario, controladorUsuario, controladorUsuario);
+        new VistaPrincipal(controladorUsuario, controladorUsuario, controladorUsuario,creadorUsuario).iniciar();
 		//TODO: DAR DE ALTA Y BAJA INSTRUCTOR
 	}
 }
