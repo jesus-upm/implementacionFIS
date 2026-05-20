@@ -8,6 +8,6 @@ public class ParticipanteUPM extends ParticipanteExterno {
 
    @Override
    public String toString() {
-      return super.toString()+";DNI:"+getDNI()+";tarjetaBancaria:"+getTarjetaBancaria();
+      return super.toString();
    }
 }

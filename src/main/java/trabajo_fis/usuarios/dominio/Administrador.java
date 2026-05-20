@@ -11,6 +11,7 @@ public class Administrador extends Usuario {
    public String getnTelefono() {
       return nTelefono;
    }
+
    public void setnTelefono(String nTelefono) {
       this.nTelefono = nTelefono;
    }
@@ -18,8 +19,13 @@ public class Administrador extends Usuario {
    public void darDeAltaInstructor(Instructor instructor) {
 
    }
+
    public void darDeBajaInstructor(Instructor instructor) {
 
+   }
+
+   public String ToString(){
+      return super.toString()+(";telefono:"+nTelefono);
    }
 
 }

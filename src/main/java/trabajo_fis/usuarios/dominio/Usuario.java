@@ -76,6 +76,6 @@ public class Usuario {
 
    @Override
    public String toString() {
-      return "";
+      return "nickUsuario:"+getNickUsuario()+";nombreCompleto:"+getNombreCompleto()+";correoElectronico:"+getEmail()+";contraseña:"+getContrasena();
    }
 }

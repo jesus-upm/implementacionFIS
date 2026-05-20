@@ -23,6 +23,6 @@ public class Instructor extends UsuarioDNI {
 
    @Override
    public String toString() {
-      return super.toString()+";DNI:"+getDNI()+";IBAN:"+getIBAN();
+      return super.toString()+";IBAN:"+getIBAN();
    }
 }
