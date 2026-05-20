@@ -19,7 +19,7 @@ public class PersonalUPM extends ParticipanteUPM {
       this.fechaAntiguedad = fechaAntiguedad;
    }
 
-   public boolean esPDI() {
+   public boolean getEsPDI() {
       return esPDI;
    }
    public void setEsPDI(boolean esPDI) {
@@ -28,6 +28,6 @@ public class PersonalUPM extends ParticipanteUPM {
 
    @Override
    public String toString() {
-      return super.toString()+";fechaAntiguedad:"+getFechaAntiguedad()+";esPDI:"+esPDI();
+      return super.toString()+";fechaAntiguedad;"+getFechaAntiguedad()+";esPDI;"+ getEsPDI();
    }
 }

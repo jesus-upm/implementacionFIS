@@ -14,15 +14,8 @@ public class Instructor extends UsuarioDNI {
       this.IBAN = IBAN;
    }
 
-   public void impartirSesionCurso() {
-
-   }
-   public void darDeBajaInstructor() {
-
-   }
-
    @Override
    public String toString() {
-      return super.toString()+";IBAN:"+getIBAN();
+      return super.toString()+";DNI;"+getDNI()+";IBAN;"+getIBAN();
    }
 }

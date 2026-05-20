@@ -11,21 +11,12 @@ public class Administrador extends Usuario {
    public String getnTelefono() {
       return nTelefono;
    }
-
    public void setnTelefono(String nTelefono) {
       this.nTelefono = nTelefono;
    }
 
-   public void darDeAltaInstructor(Instructor instructor) {
-
+   @Override
+   public String toString() {
+      return super.toString()+";nTelefono;"+getnTelefono();
    }
-
-   public void darDeBajaInstructor(Instructor instructor) {
-
-   }
-
-   public String ToString(){
-      return super.toString()+(";telefono:"+nTelefono);
-   }
-
 }

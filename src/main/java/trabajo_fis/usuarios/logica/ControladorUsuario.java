@@ -11,18 +11,21 @@ import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 import trabajo_fis.usuarios.dominio.Usuario;
-import trabajo_fis.usuarios.factory.ICreadorUsuarios;
+import trabajo_fis.usuarios.factory.ICreadorUsuario;
 import trabajo_fis.usuarios.persistencia.IPersistenciaUsuarios;
 import trabajo_fis.usuarios.persistencia.PersistenciaUsuarios;
 
 public class ControladorUsuario implements IControladorUsuario, IAutenticable, IObtenerSesion {
    private List<Usuario> usuarios;
    private Usuario usuarioLogueado;
+   private ICreadorUsuario creadorUsuarios;
 
-   private IPersistenciaUsuarios persistenciaUsuarios = new PersistenciaUsuarios();
+   private IPersistenciaUsuarios persistenciaUsuarios;
 
-   public ControladorUsuario(ICreadorUsuarios factoria) {
-      usuarios = persistenciaUsuarios.cargarTodos(factoria);
+   public ControladorUsuario(ICreadorUsuario factoria, IPersistenciaUsuarios persistencia) {
+      creadorUsuarios = factoria;
+      persistenciaUsuarios = persistencia;
+      usuarios = persistenciaUsuarios.cargarTodos();
    }
    
    @Override
@@ -69,8 +72,8 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
       return false;
    }
 
-   public void altaInstructor(ICreadorUsuarios factoria, HashMap<String, String> datos){
-      Usuario usuarioRegistrado = crearUsuario(factoria,datos);
+   public void altaInstructor(HashMap<String, String> datos){
+      Usuario usuarioRegistrado = crearUsuario(datos);
       if (usuarioRegistrado == null) {
          System.out.println("Error: no se pudo crear el instructor");
          return;
@@ -83,9 +86,9 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
    }
 
    @Override
-   public void registrarse(ICreadorUsuarios factoria, HashMap<String, String> datos) {
+   public void registrarse(ICreadorUsuario factoria, HashMap<String, String> datos) {
 
-      Usuario usuarioRegistrado = crearUsuario(factoria,datos);
+      Usuario usuarioRegistrado = crearUsuario(datos);
 
       if (usuarioRegistrado == null) {
          System.out.println("Error: no se pudo crear el usuario");
@@ -101,7 +104,7 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
    }
 
 
-   private Usuario crearUsuario(ICreadorUsuarios factoria, HashMap<String, String> datos){
+   private Usuario crearUsuario(HashMap<String, String> datos){
       if (!validarNick(datos.get("nickUsuario"))) {
          System.out.println("Error: nick inválido");
          return null;
@@ -134,7 +137,7 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
       datos.put("contraseña",contraseñaHash);
 
 
-      Usuario usuarioRegistrado = factoria.crearUsuario(datos);
+      Usuario usuarioRegistrado = creadorUsuarios.crearUsuario(datos);
       return usuarioRegistrado;
    }
 

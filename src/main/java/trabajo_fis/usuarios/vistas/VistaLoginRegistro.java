@@ -4,8 +4,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 import trabajo_fis.usuarios.logica.IAutenticable;
-import trabajo_fis.usuarios.factory.ICreadorUsuarios;
-import trabajo_fis.usuarios.logica.ControladorUsuario;
+import trabajo_fis.usuarios.factory.ICreadorUsuario;
 
 import static java.lang.Integer.parseInt;
 
@@ -38,7 +37,7 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
    }
 
    @Override
-   public void registrarse(ICreadorUsuarios factoria) {
+   public void registrarse(ICreadorUsuario factoria) {
       Scanner sc = new Scanner(System.in);
 
       HashMap<String, String> datos = new HashMap<>();

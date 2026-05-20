@@ -3,8 +3,6 @@ import java.util.HashMap;
 
 import trabajo_fis.usuarios.dominio.*;
 
-public interface ICreadorUsuarios {
-
-	public Usuario crearUsuario(HashMap<String, String> datos);
-
+public interface ICreadorUsuario {
+	Usuario crearUsuario(HashMap<String, String> datos);
 }

@@ -2,30 +2,23 @@ package trabajo_fis.usuarios.vistas;
 
 import java.util.Scanner;
 
-import trabajo_fis.usuarios.dominio.EstudianteUPM;
 import trabajo_fis.usuarios.factory.*;
-import trabajo_fis.usuarios.logica.ControladorUsuario;
 import trabajo_fis.usuarios.logica.IControladorUsuario;
 
 import trabajo_fis.usuarios.logica.IAutenticable;
 import trabajo_fis.usuarios.logica.IObtenerSesion;
 
 public class VistaPrincipal {
-	
 	private IObtenerSesion sesionActual;
 	private IVistaLoginRegistro iVistaLR;
 	private IVistaUsuarios iVistaU;
-	private ICreadorUsuarios iCreadorU;
+	private ICreadorUsuario iCreadorU;
 
 	
-	public VistaPrincipal() {
-		iCreadorU= new CreadorUsuario();
-		ControladorUsuario cu= new ControladorUsuario(iCreadorU);
-		
-		IAutenticable iAu=cu;
-		iVistaLR= new VistaLoginRegistro(iAu);
-		sesionActual= cu;
-		IControladorUsuario iCu= cu;
+	public VistaPrincipal(IControladorUsuario controladorUsuario, IAutenticable autenticable, IObtenerSesion obtenerSesion) {
+		iVistaLR = new VistaLoginRegistro(autenticable);
+		sesionActual = obtenerSesion;
+		IControladorUsuario iCu= controladorUsuario;
 		iVistaU = new VistaUsuarios(iCu);
 
 		while (true){
@@ -68,14 +61,10 @@ public class VistaPrincipal {
 	}
 	
 	public void mostrarVistaUsuarios() {
-		
 		String inputUsuario="";
 		Scanner sc = new Scanner(System.in);
-		
-		
+
 		if(sesionActual.getSesionActual()=="Administrador") {
-		
-			
 			do {			
 				System.out.println("¿Que deseas realizar? Introduce el número de la opción que desees:\n"
 						+ "1. Alta instructor\n"
@@ -87,7 +76,7 @@ public class VistaPrincipal {
 				
 					switch(inputUsuario) {
 						
-						case "1":iVistaU.altaInstructor(iCreadorU);
+						case "1":iVistaU.altaInstructor();
 							break;
 							
 						case "2":iVistaU.bajaInstructor();
