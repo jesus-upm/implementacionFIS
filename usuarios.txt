@@ -14,4 +14,5 @@ trabajo_fis.usuarios.dominio.Instructor,oscar,oscar,oscar,Lenceo055431
 trabajo_fis.usuarios.dominio.Instructor,oscar,oscar,oscar,Lencero8754165365
 trabajo_fis.usuarios.dominio.Instructor,oscar,oscar,ocsar,Lencero64531268453210
 trabajo_fis.usuarios.dominio.Instructor,oscar,ocsar,OscarLencero,Lencero98654186451
+trabajo_fis.usuarios.dominio.Instructor,osars,oscar,oscar,$2a$10$3uqScm06TviSlhTvdflSs.7auPF4NNPhn0Ie9CUCYgnqLKtZVHfTi
 trabajo_fis.usuarios.dominio.EstudianteUPM,uwu33,0sc4r L3nc3r0,lencero33@gmail.com,$2a$10$.8cs0mwkma5X8oXWgdtkMeD.U4nXlvjXfwdqh1PYamOaxoEFSI1fq,53716965M,Uwu
