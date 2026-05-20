@@ -15,11 +15,8 @@ public class Administrador extends Usuario {
       this.nTelefono = nTelefono;
    }
 
-   public void darDeAltaInstructor(Instructor instructor) {
-
+   @Override
+   public String toString() {
+      return super.toString()+";nTelefono;"+getnTelefono();
    }
-   public void darDeBajaInstructor(Instructor instructor) {
-
-   }
-
 }
