@@ -74,8 +74,8 @@ public class Usuario {
       this.contrasena = contrasena;
    }
 
+   @Override
    public String toString() {
-      return nickUsuario + "," + nombreCompleto + "," + email + "," + contrasena;
+      return "";
    }
-   
 }

@@ -6,8 +6,8 @@ public class PersonalUPM extends ParticipanteUPM {
    private LocalDate fechaAntiguedad;
    private boolean esPDI;
 
-   public PersonalUPM(String nickUsuario, String nombreCompleto, String email, String contraseña, String DNI, String tarjetaBancaria,String rolUPM, LocalDate fechaAntiguedad, boolean esPDI) {
-      super(nickUsuario, nombreCompleto, email, contraseña, DNI, tarjetaBancaria,rolUPM);
+   public PersonalUPM(String nickUsuario, String nombreCompleto, String email, String contraseña, String DNI, String tarjetaBancaria, LocalDate fechaAntiguedad, boolean esPDI) {
+      super(nickUsuario, nombreCompleto, email, contraseña, DNI, tarjetaBancaria);
       this.fechaAntiguedad = fechaAntiguedad;
       this.esPDI = esPDI;
    }
@@ -19,11 +19,15 @@ public class PersonalUPM extends ParticipanteUPM {
       this.fechaAntiguedad = fechaAntiguedad;
    }
 
-   public boolean isEsPDI() {
+   public boolean esPDI() {
       return esPDI;
    }
    public void setEsPDI(boolean esPDI) {
       this.esPDI = esPDI;
    }
 
+   @Override
+   public String toString() {
+      return super.toString()+";fechaAntiguedad:"+getFechaAntiguedad()+";esPDI:"+esPDI();
+   }
 }
