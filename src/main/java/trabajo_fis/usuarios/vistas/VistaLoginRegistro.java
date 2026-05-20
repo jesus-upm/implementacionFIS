@@ -118,9 +118,6 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
          System.out.print("Tarjeta bancaria: ");
          datos.put("tarjetaBancaria", sc.nextLine());
 
-         System.out.print("Rol UPM: ");
-         datos.put("rolUPM", sc.nextLine());
-
          System.out.print("Fecha de antigüedad (yyyy-mm-dd): ");
          datos.put("fechaAntiguedad", sc.nextLine());
 
