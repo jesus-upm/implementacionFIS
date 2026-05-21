@@ -25,6 +25,7 @@ public class VistaPrincipal {
 	public void iniciar(){
 		while (true){
 			if (sesionActual.getTipoUsuario()==null) {
+			if (sesionActual.getSesionActual().equals(null)) {
 				mostrarVistaLoginRegistro();
 			}else {
 				mostrarVistaUsuarios();

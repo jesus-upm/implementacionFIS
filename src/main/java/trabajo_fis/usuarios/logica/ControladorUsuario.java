@@ -11,6 +11,8 @@ import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 import trabajo_fis.usuarios.dominio.*;
+import trabajo_fis.usuarios.dominio.PreferenciaArtistica;
+import trabajo_fis.usuarios.dominio.Usuario;
 import trabajo_fis.usuarios.factory.ICreadorUsuario;
 import trabajo_fis.usuarios.persistencia.IPersistenciaUsuarios;
 
@@ -25,6 +27,36 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
       creadorUsuarios = factoria;
       persistenciaUsuarios = persistencia;
       usuarios = persistenciaUsuarios.cargarTodos();
+   }
+   
+   @Override
+   public String getSesionActual() {
+      return (usuarioLogueado != null) ? usuarioLogueado.getClass().getSimpleName() : null;
+   }
+
+   @Override
+   public List<PreferenciaArtistica> getPreferenciaArtistica() {
+      return usuarioLogueado.getPreferencias();//"cositas";//return (ParticipanteExterno) usuarioLogueado.getPreferenciaArtistica();
+   }
+
+   public void addPreferenciaArtistica(PreferenciaArtistica preferencia) {
+      if (usuarioLogueado != null) {
+         usuarioLogueado.aniadirPreferenciaArtistica(preferencia);
+      }
+   }
+
+   public void eliminarPreferenciaArtistica(int numPreferencia) {
+      if (usuarioLogueado != null) {
+         List<PreferenciaArtistica> preferencias = usuarioLogueado.getPreferencias();
+         if (numPreferencia >= 0 && numPreferencia < preferencias.size()) {
+            preferencias.remove(numPreferencia);
+         }
+      }
+   }
+
+   @Override
+   public String getTipoUsuario() {
+      return (usuarioLogueado != null) ? usuarioLogueado.getClass().getSimpleName() : "null";
    }
 
    @Override
