@@ -29,6 +29,8 @@ public class VistaUsuarios implements IVistaUsuarios {
    public void modificarPreferenciaArtistica() {
 
       Scanner sc = new Scanner(System.in);
+
+      mostrarPreferenciaArtistica();
       System.out.println("¿Que accion quieres realizar(introduce el número de la opciçon que prefieras?\n" +
               "1. Añadir nueva preferencia artística\n" +
               "2. Eliminar preferencia artística\n" +
@@ -120,7 +122,7 @@ public class VistaUsuarios implements IVistaUsuarios {
       datos.put("correoElectronico", sc.nextLine());
 
       System.out.print("Contraseña: ");
-      datos.put("contraseña", sc.nextLine());
+      datos.put("contrasena", sc.nextLine());
 
       System.out.print("DNI: ");
       datos.put("DNI", sc.nextLine());
