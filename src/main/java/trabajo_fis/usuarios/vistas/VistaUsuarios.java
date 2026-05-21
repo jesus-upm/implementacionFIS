@@ -1,8 +1,11 @@
 package trabajo_fis.usuarios.vistas;
 
+import trabajo_fis.usuarios.dominio.PreferenciaArtistica;
+import trabajo_fis.usuarios.dominio.TipoDisciplina;
 import trabajo_fis.usuarios.logica.IControladorUsuario;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Scanner;
 
 public class VistaUsuarios implements IVistaUsuarios {
@@ -15,14 +18,65 @@ public class VistaUsuarios implements IVistaUsuarios {
 
    @Override
    public void mostrarPreferenciaArtistica() {
-      String preferencia = iControladorUsuario.getPreferenciaArtistica();
-      System.out.println(preferencia);
+      List<PreferenciaArtistica> prefArtist = iControladorUsuario.getPreferenciaArtistica();
+      for(PreferenciaArtistica pref : prefArtist){
+         System.out.println("Disciplina: " + pref.getTipo() + ", Nivel de experiencia: " + pref.getNivelExperiencia());
+      }
    }
 
    @Override
-   public void cambiarPreferenciaArtistica() {
-      // TODO Auto-generated method stub
-      
+   public void modificarPreferenciaArtistica() {
+
+      Scanner sc = new Scanner(System.in);
+      System.out.println("¿Que accion quieres realizar(introduce el número de la opciçon que prefieras?\n" +
+              "1. Añadir nueva preferencia artística\n" +
+              "2. Eliminar preferencia artística\n" +
+              "3. Modificar nivel de experiencia de una preferencia artística");
+      String eleccionModificar = sc.nextLine();
+      switch (eleccionModificar){
+            case "1":
+                System.out.println("Que disciplina artística quieres añadir? (Introduce el número de la opción que prefieras)\n" +
+                        "1. Música\n" +
+                        "2. Pintura\n" +
+                        "3. Teatro\n");
+                String tipo = sc.nextLine();
+                TipoDisciplina tDisciplina= null;
+                switch (tipo){
+                    case "1":
+                       tDisciplina = TipoDisciplina.MUSICA;
+                        break;
+                    case "2":
+                       tDisciplina = TipoDisciplina.PINTURA;
+                        break;
+                    case "3":
+                       tDisciplina = TipoDisciplina.TEATRO;
+                        break;
+                    default:
+                        System.out.println("Opción no válida");
+                        return;
+                }
+
+                System.out.println("Introduce el nivel de experiencia: ");
+                String nivel = sc.nextLine();
+                PreferenciaArtistica nuevaPreferencia = new PreferenciaArtistica(tDisciplina, Integer.parseInt(nivel));
+                iControladorUsuario.addPreferenciaArtistica(nuevaPreferencia);
+                break;
+            case "2":
+                System.out.println("Introduce el tipo de disciplina artística a eliminar: ");
+                String tipoEliminar = sc.nextLine();
+                // Aquí deberías llamar a un método del controlador para eliminar la preferencia artística
+                // iControladorUsuario.eliminarPreferenciaArtistica(tipoEliminar);
+                break;
+            case "3":
+                System.out.println("Introduce el tipo de disciplina artística a modificar: ");
+                String tipoModificar = sc.nextLine();
+                System.out.println("Introduce el nuevo nivel de experiencia: ");
+                String nuevoNivel = sc.nextLine();
+                PreferenciaArtistica preferenciaModificada = new PreferenciaArtistica(tipoModificar, nuevoNivel);
+      }
+
+         // Aquí deberías llamar a un método del controlador para actualizar la preferencia artística
+         // iControladorUsuario.cambiarPreferenciaArtistica(nuevaPreferencia);
    }
 
    @Override
@@ -51,7 +105,7 @@ public class VistaUsuarios implements IVistaUsuarios {
       Scanner sc = new Scanner(System.in);
       HashMap<String,String> datos = new HashMap<>();
 
-      datos.put("tipoUsuario", "instructor");
+      datos.put("tipoUsuario", "Instructor");
 
       System.out.print("Nick usuario: ");
       datos.put("nickUsuario", sc.nextLine());

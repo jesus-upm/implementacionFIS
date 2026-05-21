@@ -47,6 +47,13 @@ public abstract class Usuario {
       this.contrasena = contrasena;
    }
 
+   public List<PreferenciaArtistica> getPreferencias() {
+      return preferencias;
+   }
+   public void aniadirPreferenciaArtistica(PreferenciaArtistica pArtistica){
+      preferencias.add(pArtistica);
+   }
+
    @Override
-   public String toString() {return ";nickUsuario;"+nickUsuario + ";nombreCompleto;"+ nombreCompleto + ";correoElectronico;"+ email + ";contraseña;"+contrasena;}
+   public String toString() {return "tipoUsuario;"+this.getClass().getSimpleName()+";nickUsuario"+nickUsuario + ";nombreCompleto;"+ nombreCompleto + ";correoElectronico;"+ email + ";contraseña;"+contrasena;}
 }
