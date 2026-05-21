@@ -52,12 +52,7 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
 
          while (opcion==-1) {
             System.out.print("Introduce el número de la opción que quieras: ");
-
-            try {
-               opcion = Integer.parseInt(sc.nextLine());
-            } catch (NumberFormatException e) {
-               System.out.println("Debes introducir un número válido");
-            }
+            opcion = sc.nextInt();
          }
 
 
@@ -74,11 +69,22 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
             default:
                System.out.println("Opción inválida");
          }
-      }while (datos.isEmpty());
+      } while (datos.isEmpty());
 
       // Datos comunes
-      System.out.print("Nick usuario (entre 4 y 12 caracteres): ");
-      datos.put("nickUsuario", sc.nextLine());
+      boolean condicionDeFin = false;
+      String nickUser = null, mensaje = "Nick usuario (entre 4 y 12 caracteres): ";
+      sc.nextLine(); // Limpieza de buffer
+      while (!condicionDeFin) {
+         System.out.print(mensaje);
+         nickUser = sc.nextLine();
+         if (nickUser.length() >= 4 && nickUser.length() <= 12) {
+            datos.put("nickUsuario", nickUser);
+            condicionDeFin = true;
+         } else {
+            mensaje = "Introduce un nick de usuario válido (entre 4 y 12 caracteres): ";
+         }
+      }
 
       System.out.print("Nombre completo: ");
       datos.put("nombreCompleto", sc.nextLine());
