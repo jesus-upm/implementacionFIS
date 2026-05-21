@@ -10,7 +10,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
-import trabajo_fis.usuarios.dominio.Usuario;
+import trabajo_fis.usuarios.dominio.*;
 import trabajo_fis.usuarios.factory.ICreadorUsuario;
 import trabajo_fis.usuarios.persistencia.IPersistenciaUsuarios;
 
@@ -39,7 +39,8 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
       return false;
    }
 
-   void cerrarSesion() {
+   @Override
+   public void cerrarSesion() {
       usuarioLogueado = null;
    }
 
@@ -74,20 +75,20 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
    }
 
    @Override
-   void darseDeBaja(){
+   public void darseDeBaja(){
 
    }
 
-   public boolean bajaInstructor(){
+   public boolean bajaInstructor(String email){
       Iterator<Usuario> iterator = usuarios.iterator();
 
       while (iterator.hasNext()) {
          Usuario usuario = iterator.next();
 
-         if (usuario.getEmail().equalsIgnoreCase(correo)
+         if (usuario.getEmail().equalsIgnoreCase(email)
                  && usuario.getClass().getSimpleName().equals("Instructor")) {
             usuarios.remove(usuario);
-            persistenciaUsuarios.borrar(correo);
+            persistenciaUsuarios.borrar(email);
             return true;
          }
       }
@@ -106,11 +107,32 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
       System.out.println("Instructor creado correctamente ");
    }
 
-   String getInstructor(String email) {
+   public String getInstructor(String email) {
+      Iterator<Usuario> iterator = usuarios.iterator();
 
+      while (iterator.hasNext()) {
+         Usuario usuario = iterator.next();
+
+         if (usuario.getEmail().equalsIgnoreCase(email)
+                 && usuario instanceof Instructor) {
+
+            return usuario.toString();
+         }
+      }
+      return "Instructor no encontrado";
    }
-   String getParticipante(String email) {
+   public String getParticipante(String email) {
+      Iterator<Usuario> iterator = usuarios.iterator();
 
+      while (iterator.hasNext()) {
+         Usuario usuario = iterator.next();
+
+         if (usuario.getEmail().equalsIgnoreCase(email) && usuario instanceof ParticipanteExterno) {
+
+            return usuario.toString();
+         }
+      }
+      return "Participante no encontrado";
    }
    
    @Override
@@ -190,14 +212,6 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
 
       if (datos.get("DNI") == null || datos.get("DNI").isEmpty()) {
          System.out.println("Error: DNI inválido");
-         return null;
-      }
-
-      // 2. VALIDACIÓN POR TIPO
-      String tipo = datos.get("tipoUsuario");
-
-      if (!validarCamposPorTipo(tipo, datos)) {
-         System.out.println("Error: campos específicos inválidos");
          return null;
       }
 

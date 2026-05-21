@@ -7,7 +7,7 @@ public interface IControladorUsuario {
    void addPreferenciaArtistica(String preferenciaArtistica, int nivel);
    void removePreferenciaArtistica(String preferenciaArtistica);
    void darseDeBaja();
-   boolean bajaInstructor();
+   boolean bajaInstructor(String email);
    void altaInstructor(HashMap<String, String> datos);
    String getInstructor(String email);
    String getParticipante(String email);

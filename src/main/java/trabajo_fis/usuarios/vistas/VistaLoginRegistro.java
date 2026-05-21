@@ -124,8 +124,6 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
          datos.put("esPDI", sc.nextLine());
       }
 
-      autenticable.registrarse(factoria,datos);
-
-
+      autenticable.registrarse(datos);
    }
-      }
+}

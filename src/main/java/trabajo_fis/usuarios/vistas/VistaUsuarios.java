@@ -6,16 +6,15 @@ import java.util.HashMap;
 import java.util.Scanner;
 
 public class VistaUsuarios implements IVistaUsuarios {
-   private IControladorUsuario iControladorUsuario;
+   private IControladorUsuario controladorUsuario;
 
-
-   public VistaUsuarios(IControladorUsuario iControladorUsuario) {
-      this.iControladorUsuario = iControladorUsuario;
+   public VistaUsuarios(IControladorUsuario controladorUsuario) {
+      this.controladorUsuario = controladorUsuario;
    }
 
    @Override
    public void mostrarPreferenciaArtistica() {
-      String preferencia = iControladorUsuario.getPreferenciaArtistica();
+      String preferencia = controladorUsuario.getPreferenciaArtistica();
       System.out.println(preferencia);
    }
 
@@ -33,11 +32,10 @@ public class VistaUsuarios implements IVistaUsuarios {
 
    @Override
    public void bajaInstructor() {
-      // TODO Auto-generated method stub
       Scanner sc = new Scanner(System.in);
       System.out.println("Correo de instructor a dar de baja: ");
       String correo = sc.nextLine();
-      if(iControladorUsuario.bajaInstructor(correo)){
+      if(controladorUsuario.bajaInstructor(correo)){
          System.out.println("Instructor borrado con exito");
       }
       else {
@@ -71,7 +69,7 @@ public class VistaUsuarios implements IVistaUsuarios {
       System.out.print("IBAN: ");
       datos.put("IBAN", sc.nextLine());
 
-      iControladorUsuario.altaInstructor(datos);
+      controladorUsuario.altaInstructor(datos);
    }
 
    @Override
