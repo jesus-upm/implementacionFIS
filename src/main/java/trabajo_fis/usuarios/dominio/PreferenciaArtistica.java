@@ -20,4 +20,7 @@ public class PreferenciaArtistica {
         return tipo;
     }
     public void setTipo(TipoDisciplina tipo) {this.tipo = tipo;}
+    public String toString(){
+        return tipo.name()+": "+nivelExperiencia;
+    }
 }

@@ -30,24 +30,13 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
    }
 
    @Override
-   public String getPreferenciaArtistica() {
+public String getPreferenciaArtistica() {
+   if(usuarioLogueado.getPreferencias()!=null) {
       return usuarioLogueado.getPreferencias().toString();//"cositas";//return (ParticipanteExterno) usuarioLogueado.getPreferenciaArtistica();
    }
-
-   public void addPreferenciaArtistica(PreferenciaArtistica preferencia) {
-      if (usuarioLogueado != null) {
-         usuarioLogueado.aniadirPreferenciaArtistica(preferencia);
-      }
+   return "";
    }
 
-   public void eliminarPreferenciaArtistica(int numPreferencia) {
-      if (usuarioLogueado != null) {
-         List<PreferenciaArtistica> preferencias = usuarioLogueado.getPreferencias();
-         if (numPreferencia >= 0 && numPreferencia < preferencias.size()) {
-            preferencias.remove(numPreferencia);
-         }
-      }
-   }
 
    @Override
    public boolean iniciarSesion(String email, String contrasena) {
