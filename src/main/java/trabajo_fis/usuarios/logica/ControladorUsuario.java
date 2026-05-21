@@ -110,7 +110,7 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
          return null;
       }
 
-      if (!validarContraseña(datos.get("contraseña"))) {
+      if (!validarContrasena(datos.get("contrasena"))) {
          System.out.println("Error: contraseña inválida");
          return null;
       }
@@ -133,8 +133,8 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
          return null;
       }
 
-      String contraseñaHash = BCrypt.hashpw(datos.get("contraseña"), BCrypt.gensalt());
-      datos.put("contraseña",contraseñaHash);
+      String contrasenaHash = BCrypt.hashpw(datos.get("contrasena"), BCrypt.gensalt());
+      datos.put("contrasena",contrasenaHash);
 
 
       Usuario usuarioRegistrado = creadorUsuarios.crearUsuario(datos);
@@ -185,7 +185,7 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
 
 
 
-   private boolean validarContraseña(String password) {
+   private boolean validarContrasena(String password) {
 
       if (password == null) return false;
 

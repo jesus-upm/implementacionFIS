@@ -88,7 +88,7 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
       datos.put("correoElectronico", sc.nextLine());
 
       System.out.print("Contraseña(Debe tener 12 carácteres min, entre ellas una mayúscula y un número): ");
-      datos.put("contraseña", sc.nextLine());
+      datos.put("contrasena", sc.nextLine());
 
       System.out.print("DNI: ");
       datos.put("DNI", sc.nextLine());

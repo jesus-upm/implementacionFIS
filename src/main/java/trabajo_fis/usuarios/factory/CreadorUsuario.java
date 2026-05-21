@@ -16,7 +16,7 @@ public class CreadorUsuario implements ICreadorUsuario {
                     datos.get("nickUsuario"),
                     datos.get("nombreCompleto"),
                     datos.get("correoElectronico"),
-                    datos.get("contraseña"),
+                    datos.get("contrasena"),
                     datos.get("DNI"),
                     datos.get("IBAN")
             );
@@ -24,7 +24,7 @@ public class CreadorUsuario implements ICreadorUsuario {
                     datos.get("nickUsuario"),
                     datos.get("nombreCompleto"),
                     datos.get("correoElectronico"),
-                    datos.get("contraseña"),
+                    datos.get("contrasena"),
                     datos.get("DNI"),
                     datos.get("tarjetaBancaria")
             );
@@ -32,7 +32,7 @@ public class CreadorUsuario implements ICreadorUsuario {
                     datos.get("nickUsuario"),
                     datos.get("nombreCompleto"),
                     datos.get("correoElectronico"),
-                    datos.get("contraseña"),
+                    datos.get("contrasena"),
                     datos.get("DNI"),
                     datos.get("tarjetaBancaria"),
                     datos.get("numMatricula")
@@ -41,7 +41,7 @@ public class CreadorUsuario implements ICreadorUsuario {
                     datos.get("nickUsuario"),
                     datos.get("nombreCompleto"),
                     datos.get("correoElectronico"),
-                    datos.get("contraseña"),
+                    datos.get("contrasena"),
                     datos.get("DNI"),
                     datos.get("tarjetaBancaria"),
                     LocalDate.parse(datos.get("fechaAntiguedad"), DateTimeFormatter.ofPattern("yyyy-MM-dd")),
@@ -51,7 +51,7 @@ public class CreadorUsuario implements ICreadorUsuario {
                     datos.get("nickUsuario"),
                     datos.get("nombreCompleto"),
                     datos.get("correoElectronico"),
-                    datos.get("contraseña"),
+                    datos.get("contrasena"),
                     datos.get("telefono")
             );
             default -> {

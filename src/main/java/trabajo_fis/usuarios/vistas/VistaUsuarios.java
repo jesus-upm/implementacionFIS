@@ -63,7 +63,7 @@ public class VistaUsuarios implements IVistaUsuarios {
       datos.put("correoElectronico", sc.nextLine());
 
       System.out.print("Contraseña: ");
-      datos.put("contraseña", sc.nextLine());
+      datos.put("contrasena", sc.nextLine());
 
       System.out.print("DNI: ");
       datos.put("DNI", sc.nextLine());

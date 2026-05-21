@@ -17,8 +17,8 @@ public abstract class Usuario {
       this.contrasena = contrasena;
    }
 
-   public boolean comprobarUsuario(String email, String contraseña) {
-      return this.email.equals(email) && BCrypt.checkpw(contraseña, this.contrasena);
+   public boolean comprobarUsuario(String email, String contrasena) {
+      return this.email.equals(email) && BCrypt.checkpw(contrasena, this.contrasena);
    }
 
 
