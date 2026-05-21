@@ -46,7 +46,6 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
 
    @Override
    public void registrarse(HashMap<String, String> datos) {
-
       Usuario usuarioRegistrado = comprobarYCrearUsuario(datos);
 
       if (usuarioRegistrado == null) {

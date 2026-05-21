@@ -1,5 +1,7 @@
 package trabajo_fis;
 
+import trabajo_fis.usuarios.dominio.Instructor;
+import trabajo_fis.usuarios.dominio.Usuario;
 import trabajo_fis.usuarios.factory.CreadorUsuario;
 import trabajo_fis.usuarios.logica.ControladorUsuario;
 import trabajo_fis.usuarios.persistencia.PersistenciaUsuarios;

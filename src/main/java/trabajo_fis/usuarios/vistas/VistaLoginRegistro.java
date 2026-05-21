@@ -48,7 +48,6 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
       System.out.println("3. Personal UPM");
 
       do {
-
          int opcion = -1;
 
          while (opcion==-1) {
@@ -64,13 +63,13 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
 
          switch (opcion) {
             case 1:
-               datos.put("tipoUsuario", "participanteExterno");
+               datos.put("tipoUsuario", "ParticipanteExterno");
                break;
             case 2:
-               datos.put("tipoUsuario", "estudianteUPM");
+               datos.put("tipoUsuario", "EstudianteUPM");
                break;
             case 3:
-               datos.put("tipoUsuario", "personalUPM");
+               datos.put("tipoUsuario", "PersonalUPM");
                break;
             default:
                System.out.println("Opción inválida");
@@ -78,7 +77,7 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
       }while (datos.isEmpty());
 
       // Datos comunes
-      System.out.print("Nick usuario: ");
+      System.out.print("Nick usuario (entre 4 y 12 caracteres): ");
       datos.put("nickUsuario", sc.nextLine());
 
       System.out.print("Nombre completo: ");
@@ -87,7 +86,7 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
       System.out.print("Correo electrónico: ");
       datos.put("correoElectronico", sc.nextLine());
 
-      System.out.print("Contraseña(Debe tener 12 carácteres min, entre ellas una mayúscula y un número): ");
+      System.out.print("Contraseña(Debe tener 12 carácteres min, entre ellas una minúscula, una mayúscula y un número): ");
       datos.put("contrasena", sc.nextLine());
 
       System.out.print("DNI: ");
@@ -96,12 +95,12 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
       // Datos específicos
       String tipo = datos.get("tipoUsuario");
 
-      if (tipo.equals("participanteExterno")) {
+      if (tipo.equals("ParticipanteExterno")) {
 
          System.out.print("Tarjeta bancaria: ");
          datos.put("tarjetaBancaria", sc.nextLine());
 
-      } else if (tipo.equals("estudianteUPM")) {
+      } else if (tipo.equals("EstudianteUPM")) {
 
          System.out.print("Tarjeta bancaria: ");
          datos.put("tarjetaBancaria", sc.nextLine());
@@ -112,7 +111,7 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
          System.out.print("Número de matrícula: ");
          datos.put("numMatricula", sc.nextLine());
 
-      } else if (tipo.equals("personalUPM")) {
+      } else if (tipo.equals("PersonalUPM")) {
 
          System.out.print("Tarjeta bancaria: ");
          datos.put("tarjetaBancaria", sc.nextLine());

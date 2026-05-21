@@ -48,10 +48,7 @@ public class VistaPrincipal {
 	        iVistaLR.iniciarSesion();
 			
 		}else if (inputUsuario.equals("2")) {
-						
 			iVistaLR.registrarse(iCreadorU);
-			return;
-			
 		} else {
 		    System.out.println("Opción no válida");
 		}
@@ -95,11 +92,12 @@ public class VistaPrincipal {
 
 				}while(!inputUsuario.equals("3"));
 			
-		}else if(sesionActual.getTipoUsuario().equals("EstudianteUPM") || sesionActual.getTipoUsuario().equals("Instructor") || sesionActual.getTipoUsuario().equals("ParticipanteExterno")) {
+		}else if(sesionActual.getTipoUsuario().equals("EstudianteUPM")
+				|| sesionActual.getTipoUsuario().equals("Instructor")
+				|| sesionActual.getTipoUsuario().equals("PersonalUPM")
+				|| sesionActual.getTipoUsuario().equals("ParticipanteExterno")) {
 			
 			do {
-				iVistaU.mostrarPreferenciaArtistica();
-				
 				System.out.println("¿Que deseas realizar? Introduce el número de la opción que desees:\n"
 						+ "1. Modificar preferencias artisticas\n"
 						+ "2. Darme de baja\n"
@@ -109,7 +107,7 @@ public class VistaPrincipal {
 				
 				switch(inputUsuario) {
 					
-					case "1":iVistaU.cambiarPreferenciaArtistica();
+					case "1":iVistaU.modificarPreferenciaArtistica();
 						break;
 						
 					case "2":iVistaU.darseDeBaja();
@@ -129,9 +127,7 @@ public class VistaPrincipal {
 		
 	}
 	public void cerrarSesion() {
-		sesionActual=null;
+		sesionActual.cerrarSesion();
 		System.out.println("Has cerrado sesion correctamente");
-		mostrarVistaLoginRegistro();
-		
 	}
 }

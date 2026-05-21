@@ -50,10 +50,6 @@ public class PersistenciaUsuarios implements IPersistenciaUsuarios {
    public void insertar(Usuario usuario) {
       try (BufferedWriter bw = new BufferedWriter(new FileWriter(ARCHIVO, true))) {
          bw.newLine();
-         String input = "trabajo_fis.usuarios.dominio.ParticipanteExterno";
-         String result = input.substring(input.lastIndexOf(".") + 1);
-         result = Character.toLowerCase(result.charAt(0)) + result.substring(1);
-         bw.write("tipoUsuario;"+result);
          bw.write(usuario.toString());
       } catch (Exception e) {
          System.out.println(e);

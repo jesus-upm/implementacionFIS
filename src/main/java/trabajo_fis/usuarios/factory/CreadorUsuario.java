@@ -12,7 +12,7 @@ public class CreadorUsuario implements ICreadorUsuario {
         String tipo = datos.get("tipoUsuario");
 
         return switch (tipo) {
-            case "instructor" -> new Instructor(
+            case "Instructor" -> new Instructor(
                     datos.get("nickUsuario"),
                     datos.get("nombreCompleto"),
                     datos.get("correoElectronico"),
@@ -20,7 +20,7 @@ public class CreadorUsuario implements ICreadorUsuario {
                     datos.get("DNI"),
                     datos.get("IBAN")
             );
-            case "participanteExterno" -> new ParticipanteExterno(
+            case "ParticipanteExterno" -> new ParticipanteExterno(
                     datos.get("nickUsuario"),
                     datos.get("nombreCompleto"),
                     datos.get("correoElectronico"),
@@ -28,7 +28,7 @@ public class CreadorUsuario implements ICreadorUsuario {
                     datos.get("DNI"),
                     datos.get("tarjetaBancaria")
             );
-            case "estudianteUPM" -> new EstudianteUPM(
+            case "EstudianteUPM" -> new EstudianteUPM(
                     datos.get("nickUsuario"),
                     datos.get("nombreCompleto"),
                     datos.get("correoElectronico"),
@@ -37,7 +37,7 @@ public class CreadorUsuario implements ICreadorUsuario {
                     datos.get("tarjetaBancaria"),
                     datos.get("numMatricula")
             );
-            case "personalUPM" -> new PersonalUPM(
+            case "PersonalUPM" -> new PersonalUPM(
                     datos.get("nickUsuario"),
                     datos.get("nombreCompleto"),
                     datos.get("correoElectronico"),
@@ -47,7 +47,7 @@ public class CreadorUsuario implements ICreadorUsuario {
                     LocalDate.parse(datos.get("fechaAntiguedad"), DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                     Boolean.parseBoolean(datos.get("esPDI"))
             );
-            case "administrador" -> new Administrador(
+            case "Administrador" -> new Administrador(
                     datos.get("nickUsuario"),
                     datos.get("nombreCompleto"),
                     datos.get("correoElectronico"),
