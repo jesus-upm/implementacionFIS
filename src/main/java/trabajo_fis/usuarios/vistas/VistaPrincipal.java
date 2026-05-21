@@ -103,8 +103,6 @@ public class VistaPrincipal {
 					|| sesionActual.getTipoUsuario().equals("PersonalUPM")
 					|| sesionActual.getTipoUsuario().equals("ParticipanteExterno")) {
 				do {
-					iVistaU.mostrarPreferenciaArtistica();
-
 					System.out.println("¿Que deseas realizar? Introduce el número de la opción que desees:\n"
 							+ "1. Modificar preferencias artisticas\n"
 							+ "2. Darme de baja\n"

@@ -8,7 +8,6 @@ public abstract class Usuario {
    private String nombreCompleto;
    private String email;
    private String contrasena;
-   private List<PreferenciaArtistica> preferencias;
 
    public Usuario(String nickUsuario, String nombreCompleto, String email, String contrasena) {
       this.nickUsuario = nickUsuario;
@@ -18,6 +17,8 @@ public abstract class Usuario {
    }
 
    public boolean comprobarUsuario(String email, String contrasena) {
+      String a = this.contrasena;
+      String b = contrasena;
       return this.email.equals(email) && BCrypt.checkpw(contrasena, this.contrasena);
    }
 
@@ -47,13 +48,6 @@ public abstract class Usuario {
       this.contrasena = contrasena;
    }
 
-   public List<PreferenciaArtistica> getPreferencias() {
-      return preferencias;
-   }
-   public void aniadirPreferenciaArtistica(PreferenciaArtistica pArtistica){
-      preferencias.add(pArtistica);
-   }
-
    @Override
-   public String toString() {return "tipoUsuario;"+this.getClass().getSimpleName()+";nickUsuario"+nickUsuario + ";nombreCompleto;"+ nombreCompleto + ";correoElectronico;"+ email + ";contraseña;"+contrasena;}
+   public String toString() {return "tipoUsuario;"+this.getClass().getSimpleName()+";nickUsuario;"+nickUsuario + ";nombreCompleto;"+ nombreCompleto + ";correoElectronico;"+ email + ";contrasena;"+contrasena;}
 }

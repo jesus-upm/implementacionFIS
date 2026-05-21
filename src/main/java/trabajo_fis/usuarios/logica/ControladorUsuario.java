@@ -31,18 +31,18 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
 
    @Override
    public String getPreferenciaArtistica() {
-      return usuarioLogueado.getPreferencias().toString();//"cositas";//return (ParticipanteExterno) usuarioLogueado.getPreferenciaArtistica();
+      return ((ParticipanteExterno)usuarioLogueado).getPreferenciasArtisticas().toString();//"cositas";//return (ParticipanteExterno) usuarioLogueado.getPreferenciaArtistica();
    }
 
    public void addPreferenciaArtistica(PreferenciaArtistica preferencia) {
       if (usuarioLogueado != null) {
-         usuarioLogueado.aniadirPreferenciaArtistica(preferencia);
+         ((ParticipanteExterno)usuarioLogueado).addPreferenciaArtistica(preferencia);
       }
    }
 
    public void eliminarPreferenciaArtistica(int numPreferencia) {
       if (usuarioLogueado != null) {
-         List<PreferenciaArtistica> preferencias = usuarioLogueado.getPreferencias();
+         List<PreferenciaArtistica> preferencias = ((ParticipanteExterno)usuarioLogueado).getPreferenciasArtisticas();
          if (numPreferencia >= 0 && numPreferencia < preferencias.size()) {
             preferencias.remove(numPreferencia);
          }
@@ -54,7 +54,6 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
       for (Usuario usuario : usuarios) {
          if (usuario.comprobarUsuario(email, contrasena)) {
             usuarioLogueado = usuario;
-
             return true;
          }
       }
