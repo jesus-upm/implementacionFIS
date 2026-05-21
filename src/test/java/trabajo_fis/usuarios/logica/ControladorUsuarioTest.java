@@ -12,7 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 
 import trabajo_fis.usuarios.dominio.Usuario;
-import trabajo_fis.usuarios.factory.ICreadorUsuarios;
+import trabajo_fis.usuarios.factory.*;
 import trabajo_fis.usuarios.persistencia.IPersistenciaUsuarios;
 
 import static org.junit.jupiter.api.Assertions.*;
