@@ -92,20 +92,20 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
       boolean correoCorrecto = false;
       String correo = null, mensajeCorreo = "Correo electrónico: ";
       while (!correoCorrecto) {
-         System.out.println(mensajeCorreo);
+         System.out.print(mensajeCorreo);
          correo = sc.nextLine();
          if (correo.trim().endsWith("@upm.es")) {
             datos.put("correoElectronico", correo);
             correoCorrecto = true;
          } else {
-            mensajeCorreo = "Introduce un correo del dominio UPM";
+            mensajeCorreo = "Introduce un correo del dominio UPM: ";
          }
       }
 
       boolean contraValida = false;
       String psswd = null, mensajePass = "Contraseña(Debe tener 12 carácteres min, entre ellas una minúscula, una mayúscula y un número): ";
       while (!contraValida) {
-         System.out.println(mensajePass);
+         System.out.print(mensajePass);
          psswd = sc.nextLine();
          if (psswd.length() >= 12 && psswd.chars().anyMatch(Character::isLowerCase) && psswd.chars().anyMatch(Character::isUpperCase)
             && psswd.chars().anyMatch(Character::isDigit)
@@ -113,7 +113,7 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
             datos.put("contrasena", psswd);
             contraValida = true;
          } else {
-            mensajePass = "Prueba a introducir un correo valido (Debe tener 12 carácteres min, entre ellas una minúscula, una mayúscula y un número)";
+            mensajePass = "Prueba a introducir una contraseña valido (Debe tener 12 carácteres min, entre ellas una minúscula, una mayúscula y un número)";
          }
       }
 
