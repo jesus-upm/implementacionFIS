@@ -98,8 +98,10 @@ public class VistaPrincipal {
 
 				}while(!inputUsuario.equals("3"));
 
-			}else if(sesionActual.getTipoUsuario().equals("EstudianteUPM") || sesionActual.getTipoUsuario().equals("Instructor") || sesionActual.getTipoUsuario().equals("ParticipanteExterno")) {
-
+			}else if(sesionActual.getTipoUsuario().equals("EstudianteUPM")
+					|| sesionActual.getTipoUsuario().equals("Instructor")
+					|| sesionActual.getTipoUsuario().equals("PersonalUPM")
+					|| sesionActual.getTipoUsuario().equals("ParticipanteExterno")) {
 				do {
 					iVistaU.mostrarPreferenciaArtistica();
 
