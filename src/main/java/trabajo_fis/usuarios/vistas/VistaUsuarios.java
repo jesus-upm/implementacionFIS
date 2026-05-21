@@ -18,10 +18,11 @@ public class VistaUsuarios implements IVistaUsuarios {
 
    @Override
    public void mostrarPreferenciaArtistica() {
-      List<PreferenciaArtistica> prefArtist = iControladorUsuario.getPreferenciaArtistica();
-      for(PreferenciaArtistica pref : prefArtist){
-         System.out.println("Disciplina: " + pref.getTipo() + ", Nivel de experiencia: " + pref.getNivelExperiencia());
-      }
+      String prefArtist = iControladorUsuario.getPreferenciaArtistica();
+      System.out.println(prefArtist);
+      //for(PreferenciaArtistica pref : prefArtist){
+      //   System.out.println("Disciplina: " + pref.getTipo() + ", Nivel de experiencia: " + pref.getNivelExperiencia());
+      //}
    }
 
    @Override
@@ -59,7 +60,7 @@ public class VistaUsuarios implements IVistaUsuarios {
                 System.out.println("Introduce el nivel de experiencia: ");
                 String nivel = sc.nextLine();
                 PreferenciaArtistica nuevaPreferencia = new PreferenciaArtistica(tDisciplina, Integer.parseInt(nivel));
-                iControladorUsuario.addPreferenciaArtistica(nuevaPreferencia);
+                iControladorUsuario.addPreferenciaArtistica(nuevaPreferencia.toString(), Integer.parseInt(nivel));
                 break;
             case "2":
                 System.out.println("Introduce el tipo de disciplina artística a eliminar: ");
@@ -72,7 +73,9 @@ public class VistaUsuarios implements IVistaUsuarios {
                 String tipoModificar = sc.nextLine();
                 System.out.println("Introduce el nuevo nivel de experiencia: ");
                 String nuevoNivel = sc.nextLine();
-                PreferenciaArtistica preferenciaModificada = new PreferenciaArtistica(tipoModificar, nuevoNivel);
+
+                //TODO: FROMSTRING
+                //PreferenciaArtistica preferenciaModificada = new PreferenciaArtistica(tipoModificar.toString(), Integer.parseInt(nuevoNivel));
       }
 
          // Aquí deberías llamar a un método del controlador para actualizar la preferencia artística

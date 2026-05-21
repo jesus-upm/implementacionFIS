@@ -28,15 +28,10 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
       persistenciaUsuarios = persistencia;
       usuarios = persistenciaUsuarios.cargarTodos();
    }
-   
-   @Override
-   public String getSesionActual() {
-      return (usuarioLogueado != null) ? usuarioLogueado.getClass().getSimpleName() : null;
-   }
 
    @Override
-   public List<PreferenciaArtistica> getPreferenciaArtistica() {
-      return usuarioLogueado.getPreferencias();//"cositas";//return (ParticipanteExterno) usuarioLogueado.getPreferenciaArtistica();
+   public String getPreferenciaArtistica() {
+      return usuarioLogueado.getPreferencias().toString();//"cositas";//return (ParticipanteExterno) usuarioLogueado.getPreferenciaArtistica();
    }
 
    public void addPreferenciaArtistica(PreferenciaArtistica preferencia) {
@@ -52,11 +47,6 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
             preferencias.remove(numPreferencia);
          }
       }
-   }
-
-   @Override
-   public String getTipoUsuario() {
-      return (usuarioLogueado != null) ? usuarioLogueado.getClass().getSimpleName() : "null";
    }
 
    @Override
@@ -91,11 +81,6 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
 
       System.out.println("Usuario registrado correctamente: " + datos.get("tipoUsuario"));
 
-   }
-
-   @Override
-   public String getPreferenciaArtistica() {
-      return "cositas";//return (ParticipanteExterno) usuarioLogueado.getPreferenciaArtistica();
    }
 
    public void addPreferenciaArtistica(String preferenciaArtistica, int nivel) {
