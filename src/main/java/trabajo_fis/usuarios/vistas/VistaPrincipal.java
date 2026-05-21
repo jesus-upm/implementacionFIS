@@ -23,7 +23,7 @@ public class VistaPrincipal {
 	}
 	public void iniciar(){
 		while (true){
-			if (sesionActual.getSesionActual()==null) {
+			if (sesionActual.getTipoUsuario()==null) {
 				mostrarVistaLoginRegistro();
 			}else {
 				mostrarVistaUsuarios();
@@ -63,7 +63,7 @@ public class VistaPrincipal {
 		String inputUsuario="";
 		Scanner sc = new Scanner(System.in);
 
-		if(sesionActual.getSesionActual().equals("Administrador")) {
+		if(sesionActual.getTipoUsuario().equals("Administrador")) {
 			do {			
 				System.out.println("¿Que deseas realizar? Introduce el número de la opción que desees:\n"
 						+ "1. Alta instructor\n"
@@ -97,7 +97,7 @@ public class VistaPrincipal {
 
 				}while(!inputUsuario.equals("3"));
 			
-		}else if(sesionActual.getSesionActual().equals("EstudianteUPM") || sesionActual.getSesionActual().equals("Instructor") || sesionActual.getSesionActual().equals("ParticipanteExterno")) {
+		}else if(sesionActual.getTipoUsuario().equals("EstudianteUPM") || sesionActual.getTipoUsuario().equals("Instructor") || sesionActual.getTipoUsuario().equals("ParticipanteExterno")) {
 			
 			do {
 				iVistaU.mostrarPreferenciaArtistica();

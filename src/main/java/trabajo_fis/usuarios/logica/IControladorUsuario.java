@@ -4,7 +4,11 @@ import java.util.HashMap;
 
 public interface IControladorUsuario {
    String getPreferenciaArtistica();
-   String getTipoUsuario();
+   void addPreferenciaArtistica(String preferenciaArtistica, int nivel);
+   void removePreferenciaArtistica(String preferenciaArtistica);
+   void darseDeBaja();
+   boolean bajaInstructor();
    void altaInstructor(HashMap<String, String> datos);
-   boolean bajaInstructor(String correo);
+   String getInstructor(String email);
+   String getParticipante(String email);
 }
