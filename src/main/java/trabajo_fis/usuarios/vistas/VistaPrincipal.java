@@ -15,16 +15,16 @@ public class VistaPrincipal {
 	private ICreadorUsuario iCreadorU;
 
 	
-	public VistaPrincipal(IControladorUsuario controladorUsuario, IAutenticable autenticable, IObtenerSesion obtenerSesion,ICreadorUsuario creadorUsuario) {
+	public VistaPrincipal(IControladorUsuario controladorUsuario, IAutenticable autenticable, IObtenerSesion obtenerSesion, ICreadorUsuario creadorUsuario) {
 		this.iVistaLR = new VistaLoginRegistro(autenticable);
 		this.iCreadorU=creadorUsuario;
 		this.sesionActual = obtenerSesion;
-		IControladorUsuario iCu= controladorUsuario;
-		this.iVistaU = new VistaUsuarios(iCu);
+		this.iVistaU = new VistaUsuarios(controladorUsuario);
 	}
+
 	public void iniciar(){
 		while (true){
-			if (sesionActual.getSesionActual()==null) {
+			if (sesionActual.getTipoUsuario()==null) {
 				mostrarVistaLoginRegistro();
 			}else {
 				mostrarVistaUsuarios();
@@ -32,9 +32,7 @@ public class VistaPrincipal {
 		}
 	}
 	
-	
 	public void mostrarVistaLoginRegistro() {
-		
 		String inputUsuario="";
 		
 		Scanner sc = new Scanner(System.in);
@@ -59,12 +57,11 @@ public class VistaPrincipal {
 		}
 		
 	}
-	
 	public void mostrarVistaUsuarios() {
 		String inputUsuario="";
 		Scanner sc = new Scanner(System.in);
 
-		if(sesionActual.getSesionActual().equals("Administrador")) {
+		if(sesionActual.getTipoUsuario().equals("Administrador")) {
 			do {			
 				System.out.println("¿Que deseas realizar? Introduce el número de la opción que desees:\n"
 						+ "1. Alta instructor\n"
@@ -98,7 +95,7 @@ public class VistaPrincipal {
 
 				}while(!inputUsuario.equals("3"));
 			
-		}else if(sesionActual.getSesionActual().equals("EstudianteUPM") || sesionActual.getSesionActual().equals("Instructor") || sesionActual.getSesionActual().equals("ParticipanteExterno")) {
+		}else if(sesionActual.getTipoUsuario().equals("EstudianteUPM") || sesionActual.getTipoUsuario().equals("Instructor") || sesionActual.getTipoUsuario().equals("ParticipanteExterno")) {
 			
 			do {
 				iVistaU.mostrarPreferenciaArtistica();
@@ -137,7 +134,4 @@ public class VistaPrincipal {
 		mostrarVistaLoginRegistro();
 		
 	}
-
-
-
 }

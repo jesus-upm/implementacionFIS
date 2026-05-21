@@ -2,8 +2,8 @@ package trabajo_fis.usuarios.dominio;
 
 public class Instructor extends UsuarioDNI {
    private String IBAN;
-   public Instructor(String nickUsuario, String nombreCompleto, String email, String contraseña, String DNI, String IBAN) {
-      super(nickUsuario, nombreCompleto, email, contraseña, DNI);
+   public Instructor(String nickUsuario, String nombreCompleto, String email, String contrasena, String DNI, String IBAN) {
+      super(nickUsuario, nombreCompleto, email, contrasena, DNI);
       this.IBAN = IBAN;
    }
 

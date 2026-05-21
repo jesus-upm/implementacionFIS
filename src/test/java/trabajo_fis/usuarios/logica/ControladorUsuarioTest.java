@@ -23,13 +23,13 @@ class ControladorUsuarioTest {
 
     private ControladorUsuario controlador;
     private IPersistenciaUsuarios persistenciaMock;
-    private ICreadorUsuarios factoriaMock;
+    private ICreadorUsuario factoriaMock;
     private List<Usuario> listaUsuariosSimulada;
 
     @BeforeEach
     void setUp() throws Exception {
         persistenciaMock = mock(IPersistenciaUsuarios.class);
-        factoriaMock = mock(ICreadorUsuarios.class);
+        factoriaMock = mock(ICreadorUsuario.class);
 
         // Simulamos una base de datos vacía al iniciar el controlador
         listaUsuariosSimulada = new ArrayList<>();
@@ -57,7 +57,7 @@ class ControladorUsuarioTest {
         private HashMap<String, String> crearDatosBaseValidos(String tipo) {
             HashMap<String, String> datos = new HashMap<>();
             datos.put("nickUsuario", "alumnofis2026"); // 13 caracteres, alfanumérico, sin símbolos
-            datos.put("contraseña", "Segura12345678"); // 14 caracteres: Mayúscula, Minúscula y Número
+            datos.put("contrasena", "Segura12345678"); // 14 caracteres: Mayúscula, Minúscula y Número
             datos.put("correoElectronico", "alta@upm.es");
             datos.put("DNI", "12345678A");
             datos.put("tipoUsuario", tipo);
@@ -136,7 +136,7 @@ class ControladorUsuarioTest {
         @DisplayName("CN-REG-08: Error si la contraseña es menor de 12 caracteres")
         void testRegistrarse_ContraseniaCorta_NoRegistra() {
             HashMap<String, String> datos = crearDatosBaseValidos("participanteExterno");
-            datos.put("contraseña", "Short123456"); // 11 caracteres
+            datos.put("contrasena", "Short123456"); // 11 caracteres
             datos.put("tarjetaBancaria", "1234");
 
             controlador.registrarse(factoriaMock, datos);
@@ -148,7 +148,7 @@ class ControladorUsuarioTest {
         @DisplayName("CN-REG-09: Error si la contraseña no cumple la complejidad (Falta número)")
         void testRegistrarse_ContraseniaSinNumero_NoRegistra() {
             HashMap<String, String> datos = crearDatosBaseValidos("participanteExterno");
-            datos.put("contraseña", "ContraseniaSinNumeros");
+            datos.put("contrasena", "ContraseniaSinNumeros");
             datos.put("tarjetaBancaria", "1234");
 
             controlador.registrarse(factoriaMock, datos);
@@ -243,7 +243,7 @@ class ControladorUsuarioTest {
         void testAltaInstructor_ConIbanValido_RegistraCorrectamente() {
             HashMap<String, String> datos = new HashMap<>();
             datos.put("nickUsuario", "instructor1");
-            datos.put("contraseña", "InstructorPass1");
+            datos.put("contrasena", "InstructorPass1");
             datos.put("correoElectronico", "ins@upm.es");
             datos.put("DNI", "87654321B");
             datos.put("tipoUsuario", "instructor");
@@ -263,7 +263,7 @@ class ControladorUsuarioTest {
         void testAltaInstructor_SinIban_NoPermiteRegistro() {
             HashMap<String, String> datos = new HashMap<>();
             datos.put("nickUsuario", "instructor1");
-            datos.put("contraseña", "InstructorPass1");
+            datos.put("contrasena", "InstructorPass1");
             datos.put("correoElectronico", "ins@upm.es");
             datos.put("DNI", "87654321B");
             datos.put("tipoUsuario", "instructor");

@@ -9,8 +9,8 @@ public class ParticipanteExterno extends UsuarioDNI {
 
    private List<PreferenciaArtistica> preferenciasArtisticas = new ArrayList<>();
 
-   public ParticipanteExterno(String nickUsuario, String nombreCompleto, String email, String contraseña, String DNI, String tarjetaBancaria) {
-      super(nickUsuario, nombreCompleto, email, contraseña, DNI);
+   public ParticipanteExterno(String nickUsuario, String nombreCompleto, String email, String contrasena, String DNI, String tarjetaBancaria) {
+      super(nickUsuario, nombreCompleto, email, contrasena, DNI);
       this.tarjetaBancaria = tarjetaBancaria;
    }
 

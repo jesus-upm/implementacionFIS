@@ -3,8 +3,8 @@ package trabajo_fis.usuarios.dominio;
 public class Administrador extends Usuario {
    private String nTelefono;
 
-   public Administrador(String nick, String nombreCompleto, String email, String contraseña, String nTelefono) {
-      super(nick, nombreCompleto, email, contraseña);
+   public Administrador(String nick, String nombreCompleto, String email, String contrasena, String nTelefono) {
+      super(nick, nombreCompleto, email, contrasena);
       this.nTelefono = nTelefono;
    }
 
