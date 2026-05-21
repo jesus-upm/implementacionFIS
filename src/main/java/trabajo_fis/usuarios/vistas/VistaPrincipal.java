@@ -19,8 +19,7 @@ public class VistaPrincipal {
 		this.iVistaLR = new VistaLoginRegistro(autenticable);
 		this.iCreadorU=creadorUsuario;
 		this.sesionActual = obtenerSesion;
-		IControladorUsuario iCu= controladorUsuario;
-		this.iVistaU = new VistaUsuarios(iCu);
+		this.iVistaU = new VistaUsuarios(controladorUsuario);
 	}
 	public void iniciar(){
 		while (true){
