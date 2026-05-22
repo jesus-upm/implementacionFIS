@@ -57,8 +57,37 @@ public class PersistenciaUsuarios implements IPersistenciaUsuarios {
    }
 
    @Override
-   public void borrar(String email) {
-      System.out.println("Usuario borrado con email: " + email);
+   public void borrar(String linea) {
+      File inputFile = new File(ARCHIVO);
+      File tempFile = new File("temp.txt");
+
+      try{
+
+         BufferedReader reader = new BufferedReader(new FileReader(inputFile));
+         BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+
+         String lineaActual;
+
+         while ((lineaActual = reader.readLine()) != null) {
+            // Si la línea NO contiene el texto, la escribimos
+            if (!lineaActual.contains(linea)) {
+               writer.write(lineaActual);
+               writer.newLine();
+            }
+         }
+
+         writer.close();
+         reader.close();
+
+         inputFile.delete();
+         tempFile.renameTo(inputFile);
+
+         System.out.println("Usuario borrado con email: " + linea);
+
+      }catch(Exception e){
+         System.out.println(e);
+      }
+
    }
 
    @Override
