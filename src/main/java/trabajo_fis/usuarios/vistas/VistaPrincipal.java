@@ -39,9 +39,10 @@ public class VistaPrincipal {
 
 			Scanner sc = new Scanner(System.in);
 
-			System.out.println("¿Quieres iniciar sesión o registrarte? Introduce el número de la opción que desees:\n"
+			System.out.print("¿Quieres iniciar sesión o registrarte? Introduce el número de la opción que desees:\n"
 					+ "1. Iniciar sesión\n"
-					+ "2. Registrarse\n");
+					+ "2. Registrarse\n"
+					+ "Escoge tu opción: ");
 
 			inputUsuario=sc.nextLine();
 
@@ -66,12 +67,13 @@ public class VistaPrincipal {
 
 			if(sesionActual.getTipoUsuario().equals("Administrador")) {
 				do {
-					System.out.println("¿Que deseas realizar? Introduce el número de la opción que desees:\n"
+					System.out.print("¿Que deseas realizar? Introduce el número de la opción que desees:\n"
 							+ "1. Alta instructor\n"
 							+ "2. Baja instructor\n"
 							+ "3. Mostrar instructor\n"
 							+ "4. Mostrar participante\n"
-							+ "5. Cerrar sesion\n");
+							+ "5. Cerrar sesion\n"
+							+ "Elige tu opción: ");
 					inputUsuario=sc.nextLine();
 
 					switch(inputUsuario) {
@@ -103,10 +105,11 @@ public class VistaPrincipal {
 					|| sesionActual.getTipoUsuario().equals("PersonalUPM")
 					|| sesionActual.getTipoUsuario().equals("ParticipanteExterno")) {
 				do {
-					System.out.println("¿Que deseas realizar? Introduce el número de la opción que desees:\n"
+					System.out.print("¿Que deseas realizar? Introduce el número de la opción que desees:\n"
 							+ "1. Modificar preferencias artisticas\n"
 							+ "2. Darme de baja\n"
-							+ "3. Cerrar sesion\n");
+							+ "3. Cerrar sesion\n"
+							+ "Introduce tu opción: ");
 
 					inputUsuario=sc.nextLine();
 
