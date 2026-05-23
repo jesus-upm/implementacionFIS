@@ -98,38 +98,32 @@ public class VistaPrincipal {
 
 					}
 
-				}while(!inputUsuario.equals("3"));
+				}while(!inputUsuario.equals("5"));
 
 			}else if(sesionActual.getTipoUsuario().equals("EstudianteUPM")
 					|| sesionActual.getTipoUsuario().equals("Instructor")
 					|| sesionActual.getTipoUsuario().equals("PersonalUPM")
 					|| sesionActual.getTipoUsuario().equals("ParticipanteExterno")) {
-				do {
-					System.out.print("¿Que deseas realizar? Introduce el número de la opción que desees:\n"
-							+ "1. Modificar preferencias artisticas\n"
-							+ "2. Darme de baja\n"
-							+ "3. Cerrar sesion\n"
-							+ "Introduce tu opción: ");
+
+					System.out.print("¿Que deseas realizar?\n"
+							+ "1. Darme de baja\n"
+							+ "2. Cerrar sesion\n"
+							+ "Introduce tu opción(introduce el número de la opción que quieras): ");
 
 					inputUsuario=sc.nextLine();
 
 					switch(inputUsuario) {
-
-						case "1":iVistaU.modificarPreferenciaArtistica();
+						case "1":iVistaU.darseDeBaja();
+								 cerrarSesion();
 							break;
 
-						case "2":iVistaU.darseDeBaja();
-							break;
-
-						case "3":cerrarSesion();
+						case "2":cerrarSesion();
 							break;
 
 						default: System.out.println("Opción no válida introducida");
 							break;
 
 					}
-
-				}while(!inputUsuario.equals("3"));
 			}
 
 

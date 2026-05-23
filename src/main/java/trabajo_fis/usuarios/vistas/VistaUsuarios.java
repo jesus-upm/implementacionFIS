@@ -86,7 +86,7 @@ public class VistaUsuarios implements IVistaUsuarios {
 
    @Override
    public void darseDeBaja() {
-      // TODO Auto-generated method stub
+      iControladorUsuario.darseDeBaja();
       
    }
 
