@@ -53,7 +53,6 @@ public class VistaPrincipal {
 			}else if (inputUsuario.equals("2")) {
 
 				iVistaLR.registrarse(iCreadorU);
-				return;
 
 			} else {
 				System.out.println("Opción no válida");
@@ -70,9 +69,7 @@ public class VistaPrincipal {
 					System.out.print("¿Que deseas realizar? Introduce el número de la opción que desees:\n"
 							+ "1. Alta instructor\n"
 							+ "2. Baja instructor\n"
-							+ "3. Mostrar instructor\n"
-							+ "4. Mostrar participante\n"
-							+ "5. Cerrar sesion\n"
+							+ "3. Cerrar sesion\n"
 							+ "Elige tu opción: ");
 					inputUsuario=sc.nextLine();
 
@@ -84,13 +81,7 @@ public class VistaPrincipal {
 						case "2":iVistaU.bajaInstructor();
 							break;
 
-						case "3":iVistaU.mostrarInstructor();
-							break;
-
-						case "4":iVistaU.mostrarParticipante();
-							break;
-
-						case "5":cerrarSesion();
+						case "3":sesionActual.cerrarSesion(); iniciar();
 							break;
 
 						default: System.out.println("Opción no válida introducida");
@@ -114,10 +105,10 @@ public class VistaPrincipal {
 
 					switch(inputUsuario) {
 						case "1":iVistaU.darseDeBaja();
-								 cerrarSesion();
+								 sesionActual.cerrarSesion(); iniciar();
 							break;
 
-						case "2":cerrarSesion();
+						case "2":sesionActual.cerrarSesion(); iniciar();
 							break;
 
 						default: System.out.println("Opción no válida introducida");
@@ -128,13 +119,5 @@ public class VistaPrincipal {
 
 
 		}
-		public void cerrarSesion() {
-			sesionActual=null;
-			System.out.println("Has cerrado sesion correctamente");
-			mostrarVistaLoginRegistro();
-
-		}
-
-
 
 	}

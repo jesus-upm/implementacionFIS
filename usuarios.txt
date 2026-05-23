@@ -16,3 +16,5 @@ tipoUsuario;PersonalUPM;nickUsuario;paquito;nombreCompleto;Paco Jones;correoElec
 tipoUsuario;EstudianteUPM;nickUsuario;JoseA;nombreCompleto;Jose;correoElectronico;Jose@upm.es;contrasena;$2a$10$bw/26PL6NoSDd6n.WFHOf.IDYK0V5i7pOTDizBwmoXah21m1LlLBu;DNI;02778255Q;tarjetaBancaria;turazaentera;numMatricula;bv01888
 tipoUsuario;Administrador;nickUsuario;admin1;nombreCompleto;Administrador;correoElectronico;administrador@upm.es;contrasena;$2a$10$fQBPQpF4JseVJbWRQ5mZruK7GQWC26QqeoBaRx/Ta3WAdmMW95wD6;nTelefono;546357357357
 
+
+tipoUsuario;Instructor;nickUsuario;nuevo;nombreCompleto;Nuevo;correoElectronico;nuevo@upm.es;contrasena;$2a$10$f2gqBt/mvEBHq7j9bThG1OyLlkOokIbl4ljQi85yZSW961L6N1Djq;DNI;1234;DNI;1234;IBAN;1234

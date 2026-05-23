@@ -63,6 +63,7 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
    @Override
    public void cerrarSesion() {
       usuarioLogueado = null;
+      System.out.println("Has cerrado sesion correctamente");
    }
 
    @Override
@@ -257,9 +258,7 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
             return true;
          }
       }
-
       return false;
    }
-
 
 }

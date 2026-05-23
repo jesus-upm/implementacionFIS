@@ -17,77 +17,8 @@ public class VistaUsuarios implements IVistaUsuarios {
    }
 
    @Override
-   public void mostrarPreferenciaArtistica() {
-      String prefArtist = iControladorUsuario.getPreferenciaArtistica();
-      System.out.println(prefArtist);
-      //for(PreferenciaArtistica pref : prefArtist){
-      //   System.out.println("Disciplina: " + pref.getTipo() + ", Nivel de experiencia: " + pref.getNivelExperiencia());
-      //}
-   }
-
-   @Override
-   public void modificarPreferenciaArtistica() {
-
-      Scanner sc = new Scanner(System.in);
-
-      mostrarPreferenciaArtistica();
-      System.out.println("¿Que accion quieres realizar(introduce el número de la opciçon que prefieras?\n" +
-              "1. Añadir nueva preferencia artística\n" +
-              "2. Eliminar preferencia artística\n" +
-              "3. Modificar nivel de experiencia de una preferencia artística");
-      String eleccionModificar = sc.nextLine();
-      switch (eleccionModificar){
-            case "1":
-                System.out.println("Que disciplina artística quieres añadir? (Introduce el número de la opción que prefieras)\n" +
-                        "1. Música\n" +
-                        "2. Pintura\n" +
-                        "3. Teatro\n");
-                String tipo = sc.nextLine();
-                TipoDisciplina tDisciplina= null;
-                switch (tipo){
-                    case "1":
-                       tDisciplina = TipoDisciplina.MUSICA;
-                        break;
-                    case "2":
-                       tDisciplina = TipoDisciplina.PINTURA;
-                        break;
-                    case "3":
-                       tDisciplina = TipoDisciplina.TEATRO;
-                        break;
-                    default:
-                        System.out.println("Opción no válida");
-                        return;
-                }
-
-                System.out.println("Introduce el nivel de experiencia: ");
-                String nivel = sc.nextLine();
-                PreferenciaArtistica nuevaPreferencia = new PreferenciaArtistica(tDisciplina, Integer.parseInt(nivel));
-                iControladorUsuario.addPreferenciaArtistica(nuevaPreferencia.toString(), Integer.parseInt(nivel));
-                break;
-            case "2":
-                System.out.println("Introduce el tipo de disciplina artística a eliminar: ");
-                String tipoEliminar = sc.nextLine();
-                // Aquí deberías llamar a un método del controlador para eliminar la preferencia artística
-                // iControladorUsuario.eliminarPreferenciaArtistica(tipoEliminar);
-                break;
-            case "3":
-                System.out.println("Introduce el tipo de disciplina artística a modificar: ");
-                String tipoModificar = sc.nextLine();
-                System.out.println("Introduce el nuevo nivel de experiencia: ");
-                String nuevoNivel = sc.nextLine();
-
-                //TODO: FROMSTRING
-                //PreferenciaArtistica preferenciaModificada = new PreferenciaArtistica(tipoModificar.toString(), Integer.parseInt(nuevoNivel));
-      }
-
-         // Aquí deberías llamar a un método del controlador para actualizar la preferencia artística
-         // iControladorUsuario.cambiarPreferenciaArtistica(nuevaPreferencia);
-   }
-
-   @Override
    public void darseDeBaja() {
       iControladorUsuario.darseDeBaja();
-      
    }
 
    @Override
@@ -131,18 +62,6 @@ public class VistaUsuarios implements IVistaUsuarios {
       datos.put("IBAN", sc.nextLine());
 
       iControladorUsuario.altaInstructor(datos);
-   }
-
-   @Override
-   public void mostrarInstructor() {
-      // TODO Auto-generated method stub
-      
-   }
-
-   @Override
-   public void mostrarParticipante() {
-      // TODO Auto-generated method stub
-      
    }
    
 }
