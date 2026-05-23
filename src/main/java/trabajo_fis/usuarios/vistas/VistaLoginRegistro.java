@@ -16,16 +16,20 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
    @Override
    public void iniciarSesion() {
       IUPMUserData userData = ExternalLDAP.LoginLDAP();
-      String email = userData.getEmail();
-      String id = userData.getId();
-      UPMUsers rol = userData.getRol();
+      if (userData == null) {
+         System.out.println("Ocurrió un error al iniciar sesión");
+      } else {
+         System.out.println(userData.getEmail());
+         System.out.println(userData.getRol());
+      }
+      /*
       if (autenticable.iniciarSesion(email, contrasena)) {
          System.out.println("Ya has iniciado sesión.");
-         
-         
+
       } else {
          System.out.println("Correo electrónico o contraseña incorrectos.");
       }
+      */
    }
 
    @Override
