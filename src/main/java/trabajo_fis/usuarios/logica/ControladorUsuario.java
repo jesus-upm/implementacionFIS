@@ -92,6 +92,15 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
    @Override
    public void darseDeBaja(){
 
+      persistenciaUsuarios.borrar(usuarioLogueado.toString());
+
+      for (Usuario usuario : usuarios) {
+         if (usuario.equals(usuarioLogueado)) {
+            usuarios.remove(usuario);
+            break;
+         }
+      }
+
    }
 
    public boolean bajaInstructor(String email){
@@ -102,8 +111,8 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
 
          if (usuario.getEmail().equalsIgnoreCase(email)
                  && usuario.getClass().getSimpleName().equals("Instructor")) {
+            persistenciaUsuarios.borrar(getInstructor(email));
             usuarios.remove(usuario);
-            persistenciaUsuarios.borrar(email);
             return true;
          }
       }

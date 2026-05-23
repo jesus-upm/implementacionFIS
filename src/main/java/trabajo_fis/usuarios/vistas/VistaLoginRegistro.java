@@ -52,12 +52,7 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
 
          while (opcion==-1) {
             System.out.print("Introduce el número de la opción que quieras: ");
-
-            try {
-               opcion = Integer.parseInt(sc.nextLine());
-            } catch (NumberFormatException e) {
-               System.out.println("Debes introducir un número válido");
-            }
+            opcion = sc.nextInt();
          }
 
 
@@ -74,20 +69,53 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
             default:
                System.out.println("Opción inválida");
          }
-      }while (datos.isEmpty());
+      } while (datos.isEmpty());
 
       // Datos comunes
-      System.out.print("Nick usuario (entre 4 y 12 caracteres): ");
-      datos.put("nickUsuario", sc.nextLine());
+      boolean condicionDeFin = false;
+      String nickUser = null, mensajeNick = "Nick usuario (entre 4 y 12 caracteres): ";
+      sc.nextLine(); // Limpieza de buffer
+      while (!condicionDeFin) {
+         System.out.print(mensajeNick);
+         nickUser = sc.nextLine();
+         if (nickUser.length() >= 4 && nickUser.length() <= 12) {
+            datos.put("nickUsuario", nickUser);
+            condicionDeFin = true;
+         } else {
+            mensajeNick = "Introduce un nick de usuario válido (entre 4 y 12 caracteres): ";
+         }
+      }
 
       System.out.print("Nombre completo: ");
       datos.put("nombreCompleto", sc.nextLine());
 
-      System.out.print("Correo electrónico: ");
-      datos.put("correoElectronico", sc.nextLine());
+      boolean correoCorrecto = false;
+      String correo = null, mensajeCorreo = "Correo electrónico: ";
+      while (!correoCorrecto) {
+         System.out.print(mensajeCorreo);
+         correo = sc.nextLine();
+         if (correo.trim().endsWith("@upm.es")) {
+            datos.put("correoElectronico", correo);
+            correoCorrecto = true;
+         } else {
+            mensajeCorreo = "Introduce un correo del dominio UPM: ";
+         }
+      }
 
-      System.out.print("Contraseña(Debe tener 12 carácteres min, entre ellas una minúscula, una mayúscula y un número): ");
-      datos.put("contrasena", sc.nextLine());
+      boolean contraValida = false;
+      String psswd = null, mensajePass = "Contraseña(Debe tener 12 carácteres min, entre ellas una minúscula, una mayúscula y un número): ";
+      while (!contraValida) {
+         System.out.print(mensajePass);
+         psswd = sc.nextLine();
+         if (psswd.length() >= 12 && psswd.chars().anyMatch(Character::isLowerCase) && psswd.chars().anyMatch(Character::isUpperCase)
+            && psswd.chars().anyMatch(Character::isDigit)
+         ) {
+            datos.put("contrasena", psswd);
+            contraValida = true;
+         } else {
+            mensajePass = "Prueba a introducir una contraseña valido (Debe tener 12 carácteres min, entre ellas una minúscula, una mayúscula y un número)";
+         }
+      }
 
       System.out.print("DNI: ");
       datos.put("DNI", sc.nextLine());

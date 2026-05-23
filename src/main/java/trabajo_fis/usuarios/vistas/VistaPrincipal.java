@@ -39,9 +39,10 @@ public class VistaPrincipal {
 
 			Scanner sc = new Scanner(System.in);
 
-			System.out.println("¿Quieres iniciar sesión o registrarte? Introduce el número de la opción que desees:\n"
+			System.out.print("¿Quieres iniciar sesión o registrarte? Introduce el número de la opción que desees:\n"
 					+ "1. Iniciar sesión\n"
-					+ "2. Registrarse\n");
+					+ "2. Registrarse\n"
+					+ "Escoge tu opción: ");
 
 			inputUsuario=sc.nextLine();
 
@@ -66,12 +67,13 @@ public class VistaPrincipal {
 
 			if(sesionActual.getTipoUsuario().equals("Administrador")) {
 				do {
-					System.out.println("¿Que deseas realizar? Introduce el número de la opción que desees:\n"
+					System.out.print("¿Que deseas realizar? Introduce el número de la opción que desees:\n"
 							+ "1. Alta instructor\n"
 							+ "2. Baja instructor\n"
 							+ "3. Mostrar instructor\n"
 							+ "4. Mostrar participante\n"
-							+ "5. Cerrar sesion\n");
+							+ "5. Cerrar sesion\n"
+							+ "Elige tu opción: ");
 					inputUsuario=sc.nextLine();
 
 					switch(inputUsuario) {
@@ -96,37 +98,32 @@ public class VistaPrincipal {
 
 					}
 
-				}while(!inputUsuario.equals("3"));
+				}while(!inputUsuario.equals("5"));
 
 			}else if(sesionActual.getTipoUsuario().equals("EstudianteUPM")
 					|| sesionActual.getTipoUsuario().equals("Instructor")
 					|| sesionActual.getTipoUsuario().equals("PersonalUPM")
 					|| sesionActual.getTipoUsuario().equals("ParticipanteExterno")) {
-				do {
-					System.out.println("¿Que deseas realizar? Introduce el número de la opción que desees:\n"
-							+ "1. Modificar preferencias artisticas\n"
-							+ "2. Darme de baja\n"
-							+ "3. Cerrar sesion\n");
+
+					System.out.print("¿Que deseas realizar?\n"
+							+ "1. Darme de baja\n"
+							+ "2. Cerrar sesion\n"
+							+ "Introduce tu opción(introduce el número de la opción que quieras): ");
 
 					inputUsuario=sc.nextLine();
 
 					switch(inputUsuario) {
-
-						case "1":iVistaU.modificarPreferenciaArtistica();
+						case "1":iVistaU.darseDeBaja();
+								 cerrarSesion();
 							break;
 
-						case "2":iVistaU.darseDeBaja();
-							break;
-
-						case "3":cerrarSesion();
+						case "2":cerrarSesion();
 							break;
 
 						default: System.out.println("Opción no válida introducida");
 							break;
 
 					}
-
-				}while(!inputUsuario.equals("3"));
 			}
 
 

@@ -13,3 +13,6 @@ tipoUsuario;PersonalUPM;nickUsuario;wfelkfjw;nombreCompleto;fjoawjfwe;correoElec
 tipoUsuario;PersonalUPM;nickUsuario;flewkjfwel;nombreCompleto;fewjfwelf;correoElectronico;lfewjf;contrasena;$2a$10$pdMheolsuT5U6qvk/Y2/SOb0r.Ki7wQdQ7oaXozL6nFCbxHNBoJS2;DNI;flkwejf;tarjetaBancaria;ewklfj;fechaAntiguedad;2000-01-01;esPDI;false
 tipoUsuario;PersonalUPM;nickUsuario;fewklf;nombreCompleto;flkjewjfw;correoElectronico;jflkjwalf;contrasena;$2a$10$w3UTGTlnSeUqdw0tlT89AO.1UW5N.IMJqt/m6SyOufX/bayyDG2H6;DNI;lfkaw;tarjetaBancaria;fgew;fechaAntiguedad;2000-01-01;esPDI;true
 tipoUsuario;PersonalUPM;nickUsuario;paquito;nombreCompleto;Paco Jones;correoElectronico;pacojones@upm.es;contrasena;$2a$10$SzqK7gWQgFSkhIT1xbXuD.V0QVJ6KiWufFWCGs/QAk1kFnlDMcvzq;DNI;55555555Y;tarjetaBancaria;29846;fechaAntiguedad;2000-01-01;esPDI;true
+tipoUsuario;EstudianteUPM;nickUsuario;JoseA;nombreCompleto;Jose;correoElectronico;Jose@upm.es;contrasena;$2a$10$bw/26PL6NoSDd6n.WFHOf.IDYK0V5i7pOTDizBwmoXah21m1LlLBu;DNI;02778255Q;tarjetaBancaria;turazaentera;numMatricula;bv01888
+tipoUsuario;Administrador;nickUsuario;admin1;nombreCompleto;Administrador;correoElectronico;administrador@upm.es;contrasena;$2a$10$fQBPQpF4JseVJbWRQ5mZruK7GQWC26QqeoBaRx/Ta3WAdmMW95wD6;nTelefono;546357357357
+
