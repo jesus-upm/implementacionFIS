@@ -39,3 +39,5 @@ tipoUsuario;ParticipanteExterno;nickUsuario;Xb61118f3;nombreCompleto;Usuario Rea
 tipoUsuario;PersonalUPM;nickUsuario;Nbbb1d0f5;nombreCompleto;Usuario Real c04136e4;correoElectronico;Nbbb1d0f5@upm.es;contrasena;$2a$10$9.kU2ZAQlnDt8UwLQcLkCOd.azaMh5ARox5s7t5oTygpxSnlpjcze;DNI;12345c04136e4X;tarjetaBancaria;1234567890123456;fechaAntiguedad;2020-01-01;esPDI;true
 tipoUsuario;EstudianteUPM;nickUsuario;E60bb3e52;nombreCompleto;Usuario Real 64ee63d2;correoElectronico;E60bb3e52@alumnos.upm.es;contrasena;$2a$10$L3MH.Ma/ODQXoPnlbfSsV.Eks75zP1V62Wsh1qwb6MbpvpEuNBzZS;DNI;1234564ee63d2X;tarjetaBancaria;1234567890123456;numMatricula;12345
 tipoUsuario;ParticipanteExterno;nickUsuario;Xdc2ba13d;nombreCompleto;Usuario Real 36b61b5b;correoElectronico;Xdc2ba13d@gmail.com;contrasena;$2a$10$kbC82xwCwfm8azMvNGDyFuOtLZAAaEL6iHktN2rpw6.WGkH3OpAJq;DNI;1234536b61b5bX;tarjetaBancaria;1234567890123456
+
+tipoUsuario;EstudianteUPM;nickUsuario;josemota;nombreCompleto;jose mota;correoElectronico;josemota@upm.es;contrasena;$2a$10$0fxcrFaCmE1pKP5ZsICHCO/kALRkpocGC5e43YLVAMk27.uo/NHz2;DNI;0dasf;tarjetaBancaria;fsd;numMatricula;fdsf
