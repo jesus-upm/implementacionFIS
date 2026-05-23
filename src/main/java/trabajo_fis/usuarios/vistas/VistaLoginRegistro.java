@@ -2,15 +2,12 @@ package trabajo_fis.usuarios.vistas;
 
 import java.util.HashMap;
 import java.util.Scanner;
-
 import trabajo_fis.usuarios.logica.IAutenticable;
 import trabajo_fis.usuarios.factory.ICreadorUsuario;
-
-import static java.lang.Integer.parseInt;
+import servidor.ExternalLDAP;
 
 public class VistaLoginRegistro implements IVistaLoginRegistro {
    private IAutenticable autenticable;
-
 
    public VistaLoginRegistro(IAutenticable autenticable) {
       this.autenticable = autenticable;

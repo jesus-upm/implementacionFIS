@@ -40,6 +40,13 @@
                 <artifactId>jbcrypt</artifactId>
                 <version>0.4</version>
             </dependency>
+            <dependency>
+                <groupId>etsisi.upm.es</groupId>
+                <artifactId>ETSISIUPMEmailAPassServer</artifactId>
+                <version>1</version>
+                <scope>system</scope>
+                <systemPath>${basedir}/src/main/java/externals-5.1.jar</systemPath>
+            </dependency>
         </dependencies>
 
     </project>
