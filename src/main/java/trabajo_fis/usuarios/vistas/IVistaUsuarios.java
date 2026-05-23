@@ -1,8 +1,7 @@
 package trabajo_fis.usuarios.vistas;
 
 public interface IVistaUsuarios {
-   public void darseDeBaja();
-   public void bajaInstructor();
-   public void altaInstructor();
-
+   void darseDeBaja();
+   void bajaInstructor();
+   void altaInstructor();
 }

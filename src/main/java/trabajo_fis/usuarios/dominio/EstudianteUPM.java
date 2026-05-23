@@ -8,10 +8,10 @@ public class EstudianteUPM extends ParticipanteUPM {
       this.numMatricula = numMatricula;
    }
 
-   public void setNumMatricula(String numMatricula) {this.numMatricula = numMatricula; }
    public String getNumMatricula() {
       return numMatricula;
    }
+   public void setNumMatricula(String numMatricula) {this.numMatricula = numMatricula; }
 
    @Override
    public String toString() {

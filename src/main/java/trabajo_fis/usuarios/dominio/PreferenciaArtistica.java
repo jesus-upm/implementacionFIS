@@ -10,14 +10,14 @@ public class PreferenciaArtistica {
         this.nivelExperiencia = nivelExperiencia;
     }
 
-    public int getNivelExperiencia() {
-        return nivelExperiencia;
-    }
-    public void setNivelExperiencia(int nivelExperiencia) {
-        this.nivelExperiencia = nivelExperiencia;
-    }
     public TipoDisciplina getTipo() {
         return tipo;
     }
+    public int getNivelExperiencia() {
+        return nivelExperiencia;
+    }
     public void setTipo(TipoDisciplina tipo) {this.tipo = tipo;}
+    public void setNivelExperiencia(int nivelExperiencia) {
+        this.nivelExperiencia = nivelExperiencia;
+    }
 }

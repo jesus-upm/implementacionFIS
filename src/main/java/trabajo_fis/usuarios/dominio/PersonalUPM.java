@@ -15,12 +15,12 @@ public class PersonalUPM extends ParticipanteUPM {
    public LocalDate getFechaAntiguedad() {
       return fechaAntiguedad;
    }
-   public void setFechaAntiguedad(LocalDate fechaAntiguedad) {
-      this.fechaAntiguedad = fechaAntiguedad;
-   }
-
    public boolean getEsPDI() {
       return esPDI;
+   }
+
+   public void setFechaAntiguedad(LocalDate fechaAntiguedad) {
+      this.fechaAntiguedad = fechaAntiguedad;
    }
    public void setEsPDI(boolean esPDI) {
       this.esPDI = esPDI;

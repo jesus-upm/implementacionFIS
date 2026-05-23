@@ -10,16 +10,16 @@ import trabajo_fis.usuarios.logica.IObtenerSesion;
 
 public class VistaPrincipal {
 	private IObtenerSesion sesionActual;
-	private IVistaLoginRegistro iVistaLR;
-	private IVistaUsuarios iVistaU;
-	private ICreadorUsuario iCreadorU;
+	private IVistaLoginRegistro iVistaLoginRegistro;
+	private IVistaUsuarios iVistaUsuarios;
+	private ICreadorUsuario iCreadorUsuarios;
 
 
 	public VistaPrincipal(IControladorUsuario controladorUsuario, IAutenticable autenticable, IObtenerSesion obtenerSesion, ICreadorUsuario creadorUsuario) {
-			this.iVistaLR = new VistaLoginRegistro(autenticable);
-			this.iCreadorU=creadorUsuario;
+			this.iVistaLoginRegistro = new VistaLoginRegistro(autenticable);
+			this.iCreadorUsuarios =creadorUsuario;
 			this.sesionActual = obtenerSesion;
-			this.iVistaU = new VistaUsuarios(controladorUsuario);
+			this.iVistaUsuarios = new VistaUsuarios(controladorUsuario);
 		}
 
 		public void iniciar(){
@@ -48,11 +48,11 @@ public class VistaPrincipal {
 
 
 			if(inputUsuario.equals("1")) {
-				iVistaLR.iniciarSesion();
+				iVistaLoginRegistro.iniciarSesion();
 
 			}else if (inputUsuario.equals("2")) {
 
-				iVistaLR.registrarse(iCreadorU);
+				iVistaLoginRegistro.registrarse(iCreadorUsuarios);
 
 			} else {
 				System.out.println("Opción no válida");
@@ -75,10 +75,12 @@ public class VistaPrincipal {
 
 					switch(inputUsuario) {
 
-						case "1":iVistaU.altaInstructor();
+						case "1":
+							iVistaUsuarios.altaInstructor();
 							break;
 
-						case "2":iVistaU.bajaInstructor();
+						case "2":
+							iVistaUsuarios.bajaInstructor();
 							break;
 
 						case "3":sesionActual.cerrarSesion(); iniciar();
@@ -104,7 +106,8 @@ public class VistaPrincipal {
 					inputUsuario=sc.nextLine();
 
 					switch(inputUsuario) {
-						case "1":iVistaU.darseDeBaja();
+						case "1":
+							iVistaUsuarios.darseDeBaja();
 								 sesionActual.cerrarSesion(); iniciar();
 							break;
 
@@ -116,7 +119,6 @@ public class VistaPrincipal {
 
 					}
 			}
-
 
 		}
 

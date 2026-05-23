@@ -11,7 +11,6 @@ import java.util.Scanner;
 public class VistaUsuarios implements IVistaUsuarios {
    private IControladorUsuario iControladorUsuario;
 
-
    public VistaUsuarios(IControladorUsuario iControladorUsuario) {
       this.iControladorUsuario = iControladorUsuario;
    }
