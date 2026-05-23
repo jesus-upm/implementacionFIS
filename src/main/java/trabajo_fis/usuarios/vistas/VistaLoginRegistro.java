@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Scanner;
 import trabajo_fis.usuarios.logica.IAutenticable;
 import trabajo_fis.usuarios.factory.ICreadorUsuario;
-import servidor.ExternalLDAP;
+import servidor.*;
 
 public class VistaLoginRegistro implements IVistaLoginRegistro {
    private IAutenticable autenticable;
@@ -15,16 +15,11 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
 
    @Override
    public void iniciarSesion() {
-      Scanner scanner = new Scanner(System.in);
-      
-      System.out.println("Introduce tu correo electrónico:");
-      String email = scanner.nextLine();
-      
-      System.out.println("Introduce tu contraseña:");
-      String contrasena = scanner.nextLine();
-
-
-      if ( autenticable.iniciarSesion(email, contrasena)) {
+      IUPMUserData userData = ExternalLDAP.LoginLDAP();
+      String email = userData.getEmail();
+      String id = userData.getId();
+      UPMUsers rol = userData.getRol();
+      if (autenticable.iniciarSesion(email, contrasena)) {
          System.out.println("Ya has iniciado sesión.");
          
          

@@ -9,9 +9,10 @@ import trabajo_fis.usuarios.vistas.*;
 
 public class Main {
 	public static void main(String[] args) {
-		CreadorUsuario creadorUsuario = new CreadorUsuario();
-		ControladorUsuario controladorUsuario = new ControladorUsuario(creadorUsuario, new PersistenciaUsuarios(creadorUsuario));
-
-        new VistaPrincipal(controladorUsuario, controladorUsuario, controladorUsuario, creadorUsuario).iniciar();
+		javax.swing.SwingUtilities.invokeLater(() -> {
+			CreadorUsuario creadorUsuario = new CreadorUsuario();
+			ControladorUsuario controladorUsuario = new ControladorUsuario(creadorUsuario, new PersistenciaUsuarios(creadorUsuario));
+			new VistaPrincipal(controladorUsuario, controladorUsuario, controladorUsuario, creadorUsuario).iniciar();
+		});
 	}
 }
