@@ -72,7 +72,7 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
    @Override
    public void darseDeBaja(){
 
-      persistenciaUsuarios.borrar(usuarioLogueado.toString());
+      persistenciaUsuarios.borrar(usuarioLogueado.getEmail());
 
       for (Usuario usuario : usuarios) {
          if (usuario.equals(usuarioLogueado)) {
