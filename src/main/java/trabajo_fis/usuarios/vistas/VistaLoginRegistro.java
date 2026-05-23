@@ -94,11 +94,11 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
       while (!correoCorrecto) {
          System.out.print(mensajeCorreo);
          correo = sc.nextLine();
-         if (correo.trim().endsWith("@upm.es")) {
+         if ((datos.get("tipoUsuario").equals("PersonalUPM") || datos.get("tipoUsuario").equals("EstudianteUPM")) && !correo.trim().endsWith("@upm.es")) {
+            mensajeCorreo = "Introduce un correo del dominio UPM: ";
+         } else {
             datos.put("correoElectronico", correo);
             correoCorrecto = true;
-         } else {
-            mensajeCorreo = "Introduce un correo del dominio UPM: ";
          }
       }
 
