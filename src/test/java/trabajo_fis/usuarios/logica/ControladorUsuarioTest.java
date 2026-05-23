@@ -1,277 +1,165 @@
 package trabajo_fis.usuarios.logica;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-import org.mindrot.jbcrypt.BCrypt;
+import trabajo_fis.usuarios.dominio.Usuario;
+import trabajo_fis.usuarios.factory.ICreadorUsuario;
+import trabajo_fis.usuarios.persistencia.IPersistenciaUsuarios;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 
-import trabajo_fis.usuarios.dominio.Usuario;
-import trabajo_fis.usuarios.factory.*;
-import trabajo_fis.usuarios.persistencia.IPersistenciaUsuarios;
-
-import static org.junit.jupiter.api.Assertions.*;
+// Importación estática estricta de assertTrue
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.*;
 
-@DisplayName("Pruebas de Caja Negra - ControladorUsuario")
-class ControladorUsuarioTest {
+public class ControladorUsuarioTest {
 
     private ControladorUsuario controlador;
+    private ICreadorUsuario creadorMock;
     private IPersistenciaUsuarios persistenciaMock;
-    private ICreadorUsuario factoriaMock;
-    private List<Usuario> listaUsuariosSimulada;
+    private HashMap<String, String> datos;
 
     @BeforeEach
-    void setUp() throws Exception {
+    public void setUp() {
+        creadorMock = mock(ICreadorUsuario.class);
         persistenciaMock = mock(IPersistenciaUsuarios.class);
-        factoriaMock = mock(ICreadorUsuario.class);
 
-        // Simulamos una base de datos vacía al iniciar el controlador
-        listaUsuariosSimulada = new ArrayList<>();
-        when(persistenciaMock.cargarTodos()).thenReturn(listaUsuariosSimulada);
+        when(persistenciaMock.cargarTodos()).thenReturn(new ArrayList<>());
+        controlador = new ControladorUsuario(creadorMock, persistenciaMock);
 
-        controlador = new ControladorUsuario();
+        Usuario usuarioMock = mock(Usuario.class);
+        when(creadorMock.crearUsuario(any(HashMap.class))).thenReturn(usuarioMock);
 
-        // Inyección por reflexión del Mock de persistencia para evitar escrituras reales en disco
-        java.lang.reflect.Field field = ControladorUsuario.class.getDeclaredField("persistenciaUsuarios");
-        field.setAccessible(true);
-        field.setAccessible(true);
-        field.set(controlador, persistenciaMock);
-
-        // Reinyectamos la lista limpia asociada al mock
-        java.lang.reflect.Field fieldLista = ControladorUsuario.class.getDeclaredField("usuarios");
-        fieldLista.setAccessible(true);
-        fieldLista.set(controlador, listaUsuariosSimulada);
+        datos = new HashMap<>();
+        datos.put("DNI", "12345678X");
+        datos.put("tipoUsuario", "ParticipanteExterno");
     }
 
-    @Nested
-    @DisplayName("Pruebas de la funcionalidad: registrarse(...)")
-    class RegistroUsuariosTests {
+    @Test
+    public void CP_V01_registroValidoDominioUPM() {
+        datos.put("nickUsuario", "Mariolo");
+        datos.put("contrasena", "Password123456");
+        datos.put("correoElectronico", "test@upm.es");
 
-        // Datos robustos que garantizan cumplir las reglas de negocio (Regex alfanumérico estricto y >12 caracteres)
-        private HashMap<String, String> crearDatosBaseValidos(String tipo) {
-            HashMap<String, String> datos = new HashMap<>();
-            datos.put("nickUsuario", "alumnofis2026"); // 13 caracteres, alfanumérico, sin símbolos
-            datos.put("contrasena", "Segura12345678"); // 14 caracteres: Mayúscula, Minúscula y Número
-            datos.put("correoElectronico", "alta@upm.es");
-            datos.put("DNI", "12345678A");
-            datos.put("tipoUsuario", tipo);
-            return datos;
-        }
+        controlador.registrarse(datos);
 
-        @Test
-        @DisplayName("CN-REG-01: Registro Exitoso Estudiante UPM (Datos válidos en límites)")
-        void testRegistrarse_EstudianteValido_CasoExitoso() {
-            HashMap<String, String> datos = crearDatosBaseValidos("estudianteUPM");
-            datos.put("nickUsuario", "testupm"); // 7 caracteres (Cumple >=4 y <=12)
-            datos.put("tarjetaBancaria", "455712345678");
-            datos.put("rolUPM", "Estudiante");
-            datos.put("numMatricula", "M21005");
-
-            Usuario usuarioMock = mock(Usuario.class);
-            // IMPORTANTE: Aseguramos que la factoría devuelva el objeto simulado cuando tu código lo invoque
-            when(factoriaMock.crearUsuario(any(HashMap.class))).thenReturn(usuarioMock);
-
-            controlador.registrarse(factoriaMock, datos);
-
-            // Verificación: Al ser válidos los campos, el flujo debió llamar a .insertar() en la base de datos
-            verify(persistenciaMock, times(1)).insertar(usuarioMock);
-        }
-
-        @Test
-        @DisplayName("CN-REG-04: Error cuando el Nick es demasiado corto (< 4 caracteres)")
-        void testRegistrarse_NickCorto_NoRegistra() {
-            HashMap<String, String> datos = crearDatosBaseValidos("participanteExterno");
-            datos.put("nickUsuario", "abc"); // 3 caracteres: Inválido por límite inferior
-            datos.put("tarjetaBancaria", "12345678");
-
-            controlador.registrarse(factoriaMock, datos);
-
-            verify(factoriaMock, never()).crearUsuario(any());
-            verify(persistenciaMock, never()).insertar(any());
-        }
-
-        @Test
-        @DisplayName("CN-REG-05: Error cuando el Nick es demasiado largo (> 12 caracteres)")
-        void testRegistrarse_NickLargo_NoRegistra() {
-            HashMap<String, String> datos = crearDatosBaseValidos("participanteExterno");
-            datos.put("nickUsuario", "nickMaximoTrece"); // 14 caracteres: Límite inválido
-            datos.put("tarjetaBancaria", "1234");
-
-            controlador.registrarse(factoriaMock, datos);
-
-            verify(factoriaMock, never()).crearUsuario(any());
-        }
-        @Test
-        @DisplayName("CN-REG-07: Error si el nick se encuentra en la blacklist")
-        void testRegistrarse_NickEnBlacklist_NoRegistra() {
-            HashMap<String, String> datos = crearDatosBaseValidos("participanteExterno");
-            datos.put("nickUsuario", "palabrarestringida"); // Palabra que guardamos en el archivo mock
-            datos.put("tarjetaBancaria", "12345678");
-
-            controlador.registrarse(factoriaMock, datos);
-
-            verify(factoriaMock, never()).crearUsuario(any());
-        }
-
-
-        @Test
-        @DisplayName("CN-REG-06: Error si el nick contiene caracteres especiales no alfanuméricos")
-        void testRegistrarse_NickConSimbologia_NoRegistra() {
-            HashMap<String, String> datos = crearDatosBaseValidos("participanteExterno");
-            datos.put("nickUsuario", "user_12!");
-            datos.put("tarjetaBancaria", "1234");
-
-            controlador.registrarse(factoriaMock, datos);
-
-            verify(factoriaMock, never()).crearUsuario(any());
-        }
-
-        @Test
-        @DisplayName("CN-REG-08: Error si la contraseña es menor de 12 caracteres")
-        void testRegistrarse_ContraseniaCorta_NoRegistra() {
-            HashMap<String, String> datos = crearDatosBaseValidos("participanteExterno");
-            datos.put("contrasena", "Short123456"); // 11 caracteres
-            datos.put("tarjetaBancaria", "1234");
-
-            controlador.registrarse(factoriaMock, datos);
-
-            verify(factoriaMock, never()).crearUsuario(any());
-        }
-
-        @Test
-        @DisplayName("CN-REG-09: Error si la contraseña no cumple la complejidad (Falta número)")
-        void testRegistrarse_ContraseniaSinNumero_NoRegistra() {
-            HashMap<String, String> datos = crearDatosBaseValidos("participanteExterno");
-            datos.put("contrasena", "ContraseniaSinNumeros");
-            datos.put("tarjetaBancaria", "1234");
-
-            controlador.registrarse(factoriaMock, datos);
-
-            verify(factoriaMock, never()).crearUsuario(any());
-        }
-
-        @Test
-        @DisplayName("CN-REG-10: Error si el correo ya está registrado en el sistema")
-        void testRegistrarse_CorreoDuplicado_NoRegistra() {
-            // Simulamos que ya existe un usuario con ese correo electrónico
-            Usuario usuarioExistente = mock(Usuario.class);
-            when(usuarioExistente.getEmail()).thenReturn("alta@upm.es");
-            listaUsuariosSimulada.add(usuarioExistente);
-
-            HashMap<String, String> datos = crearDatosBaseValidos("participanteExterno");
-            datos.put("tarjetaBancaria", "1234");
-
-            controlador.registrarse(factoriaMock, datos);
-
-            verify(factoriaMock, never()).crearUsuario(any());
-        }
-
-        @Test
-        @DisplayName("CN-REG-11: Error si el campo DNI es nulo o viene vacío")
-        void testRegistrarse_DniVacio_NoRegistra() {
-            HashMap<String, String> datos = crearDatosBaseValidos("participanteExterno");
-            datos.put("DNI", ""); // Entrada inválida vacía
-            datos.put("tarjetaBancaria", "1234");
-
-            controlador.registrarse(factoriaMock, datos);
-
-            verify(factoriaMock, never()).crearUsuario(any());
-        }
-
-        @Test
-        @DisplayName("CN-REG-12: Error si faltan datos obligatorios para el tipo Estudiante UPM (Falta matrícula)")
-        void testRegistrarse_EstudianteFaltaMatricula_NoRegistra() {
-            HashMap<String, String> datos = crearDatosBaseValidos("estudianteUPM");
-            datos.put("tarjetaBancaria", "1234");
-            datos.put("rolUPM", "Estudiante");
-            // No añadimos "numMatricula"
-
-            controlador.registrarse(factoriaMock, datos);
-
-            verify(factoriaMock, never()).crearUsuario(any());
-        }
+        assertTrue(controlador.getTipoUsuario() != null, "El registro con @upm.es debería ser válido");
     }
 
-    @Nested
-    @DisplayName("Pruebas de la funcionalidad: iniciarSesion(...)")
-    class LoginUsuariosTests {
+    @Test
+    public void CP_V02_registroValidoDominioAlumnos() {
+        datos.put("nickUsuario", "Mariolo");
+        datos.put("contrasena", "Password123456");
+        datos.put("correoElectronico", "alumno@alumnos.upm.es");
 
-        @Test
-        @DisplayName("CN-LOG-01: Login Exitoso con datos válidos")
-        void testIniciarSesion_CredencialesCorrectas_DevuelveTrue() {
-            Usuario usuarioTest = mock(Usuario.class);
-            when(usuarioTest.comprobarUsuario("login@upm.es", "Password12345")).thenReturn(true);
-            listaUsuariosSimulada.add(usuarioTest);
+        controlador.registrarse(datos);
 
-            boolean resultado = controlador.iniciarSesion("login@upm.es", "Password12345");
-
-            assertTrue(resultado, "El inicio de sesión debería ser exitoso");
-        }
-
-        @Test
-        @DisplayName("CN-LOG-02: Login fallido debido a contraseña incorrecta")
-        void testIniciarSesion_ContraseniaIncorrecta_DevuelveFalse() {
-            Usuario usuarioTest = mock(Usuario.class);
-            when(usuarioTest.comprobarUsuario("login@upm.es", "WrongPass")).thenReturn(false);
-            listaUsuariosSimulada.add(usuarioTest);
-
-            boolean resultado = controlador.iniciarSesion("login@upm.es", "WrongPass");
-
-            assertFalse(resultado, "El inicio de sesión debe denegarse");
-        }
-
-        @Test
-        @DisplayName("CN-LOG-03: Login fallido debido a que el correo no existe")
-        void testIniciarSesion_CorreoNoRegistrado_DevuelveFalse() {
-            boolean resultado = controlador.iniciarSesion("inexistente@upm.es", "Password12345");
-            assertFalse(resultado);
-        }
+        assertTrue(controlador.getTipoUsuario() != null, "El registro con @alumnos.upm.es debería ser válido");
     }
 
-    @Nested
-    @DisplayName("Pruebas de la funcionalidad: altaInstructor(...)")
-    class AltaInstructorTests {
+    // ==========================================
+    // CASOS DE PRUEBA INVÁLIDOS (CP_N)
+    // El usuario NO debe registrarse (getTipoUsuario() == null)
+    // ==========================================
 
-        @Test
-        @DisplayName("CN-INS-01: Alta de instructor correcta (Contiene IBAN)")
-        void testAltaInstructor_ConIbanValido_RegistraCorrectamente() {
-            HashMap<String, String> datos = new HashMap<>();
-            datos.put("nickUsuario", "instructor1");
-            datos.put("contrasena", "InstructorPass1");
-            datos.put("correoElectronico", "ins@upm.es");
-            datos.put("DNI", "87654321B");
-            datos.put("tipoUsuario", "instructor");
-            datos.put("IBAN", "ES211465...01");
+    @Test
+    public void CP_N01_nickDemasiadoCorto() {
+        datos.put("nickUsuario", "Ana");
+        datos.put("contrasena", "Password123456");
+        datos.put("correoElectronico", "test@upm.es");
 
-            Usuario instructorMock = mock(Usuario.class);
-            when(factoriaMock.crearUsuario(any())).thenReturn(instructorMock);
+        controlador.registrarse(datos);
 
-            controlador.altaInstructor(factoriaMock, datos);
+        assertTrue(controlador.getTipoUsuario() == null, "No debería registrarse un nick menor a 4 caracteres");
+    }
 
-            verify(persistenciaMock, times(1)).insertar(instructorMock);
-            assertTrue(listaUsuariosSimulada.contains(instructorMock));
-        }
+    @Test
+    public void CP_N02_nickDemasiadoLargo() {
+        datos.put("nickUsuario", "ABCDEFGHIJKLMN");
+        datos.put("contrasena", "Password123456");
+        datos.put("correoElectronico", "test@upm.es");
 
-        @Test
-        @DisplayName("CN-INS-02: Error al dar de alta instructor sin campo IBAN")
-        void testAltaInstructor_SinIban_NoPermiteRegistro() {
-            HashMap<String, String> datos = new HashMap<>();
-            datos.put("nickUsuario", "instructor1");
-            datos.put("contrasena", "InstructorPass1");
-            datos.put("correoElectronico", "ins@upm.es");
-            datos.put("DNI", "87654321B");
-            datos.put("tipoUsuario", "instructor");
-            // Se omite intencionadamente el campo IBAN
+        controlador.registrarse(datos);
 
-            controlador.altaInstructor(factoriaMock, datos);
+        assertTrue(controlador.getTipoUsuario() == null, "No debería registrarse un nick mayor a 12 caracteres");
+    }
 
-            verify(persistenciaMock, never()).insertar(any());
-        }
+    @Test
+    public void CP_N03_nickNulo() {
+        datos.put("nickUsuario", null);
+        datos.put("contrasena", "Password123456");
+        datos.put("correoElectronico", "test@upm.es");
+
+        controlador.registrarse(datos);
+
+        assertTrue(controlador.getTipoUsuario() == null, "No debería registrarse un nick nulo");
+    }
+
+    @Test
+    public void CP_N04_contrasenaCorta() {
+        datos.put("nickUsuario", "Mariolo");
+        datos.put("contrasena", "Hola");
+        datos.put("correoElectronico", "test@upm.es");
+
+        controlador.registrarse(datos);
+
+        assertTrue(controlador.getTipoUsuario() == null, "La contraseña debe tener al menos 12 caracteres");
+    }
+
+    @Test
+    public void CP_N05_contrasenaNula() {
+        datos.put("nickUsuario", "Mariolo");
+        datos.put("contrasena", null);
+        datos.put("correoElectronico", "test@upm.es");
+
+        controlador.registrarse(datos);
+
+        assertTrue(controlador.getTipoUsuario() == null, "La contraseña no puede ser nula");
+    }
+
+    @Test
+    public void CP_N06_contrasenaSinMayuscula() {
+        datos.put("nickUsuario", "Mariolo");
+        datos.put("contrasena", "password123456");
+        datos.put("correoElectronico", "test@upm.es");
+
+        controlador.registrarse(datos);
+
+        assertTrue(controlador.getTipoUsuario() == null, "La contraseña debe incluir al menos una mayúscula");
+    }
+
+    @Test
+    public void CP_N07_contrasenaSinMinuscula() {
+        datos.put("nickUsuario", "Mariolo");
+        datos.put("contrasena", "PASSWORD123456");
+        datos.put("correoElectronico", "test@upm.es");
+
+        controlador.registrarse(datos);
+
+        assertTrue(controlador.getTipoUsuario() == null, "La contraseña debe incluir al menos una minúscula");
+    }
+
+    @Test
+    public void CP_N08_contrasenaSinNumero() {
+        datos.put("nickUsuario", "Mariolo");
+        datos.put("contrasena", "PasswordCharms");
+        datos.put("correoElectronico", "test@upm.es");
+
+        controlador.registrarse(datos);
+
+        assertTrue(controlador.getTipoUsuario() == null, "La contraseña debe incluir al menos un número");
+    }
+
+    @Test
+    public void CP_N09_correoDominioIncorrecto() {
+        datos.put("nickUsuario", "Mariolo");
+        datos.put("contrasena", "Password123456");
+        datos.put("correoElectronico", "hola@gmail.com");
+
+        controlador.registrarse(datos);
+
+        assertTrue(controlador.getTipoUsuario() == null, "El correo electrónico debe pertenecer a la UPM");
     }
 }

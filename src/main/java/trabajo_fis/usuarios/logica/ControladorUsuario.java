@@ -30,23 +30,19 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
    }
 
    @Override
-   public String getPreferenciaArtistica() {
-      return ((ParticipanteExterno)usuarioLogueado).getPreferenciasArtisticas().toString();//"cositas";//return (ParticipanteExterno) usuarioLogueado.getPreferenciaArtistica();
-   }
+   public void registrarse(HashMap<String, String> datos) {
+      Usuario usuarioRegistrado = comprobarYCrearUsuario(datos);
 
-   public void addPreferenciaArtistica(PreferenciaArtistica preferencia) {
-      if (usuarioLogueado != null) {
-         ((ParticipanteExterno)usuarioLogueado).addPreferenciaArtistica(preferencia);
+      if (usuarioRegistrado == null) {
+         System.out.println("Error: no se pudo crear el usuario");
+         return;
       }
-   }
 
-   public void eliminarPreferenciaArtistica(int numPreferencia) {
-      if (usuarioLogueado != null) {
-         List<PreferenciaArtistica> preferencias = ((ParticipanteExterno)usuarioLogueado).getPreferenciasArtisticas();
-         if (numPreferencia >= 0 && numPreferencia < preferencias.size()) {
-            preferencias.remove(numPreferencia);
-         }
-      }
+      usuarioLogueado=usuarioRegistrado;
+      persistenciaUsuarios.insertar(usuarioRegistrado);
+      usuarios.add(usuarioRegistrado);
+
+      System.out.println("Usuario registrado correctamente: " + datos.get("tipoUsuario"));
    }
 
    @Override
@@ -63,23 +59,7 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
    @Override
    public void cerrarSesion() {
       usuarioLogueado = null;
-   }
-
-   @Override
-   public void registrarse(HashMap<String, String> datos) {
-      Usuario usuarioRegistrado = comprobarYCrearUsuario(datos);
-
-      if (usuarioRegistrado == null) {
-         System.out.println("Error: no se pudo crear el usuario");
-         return;
-      }
-
-      usuarioLogueado=usuarioRegistrado;
-      persistenciaUsuarios.insertar(usuarioRegistrado);
-      usuarios.add(usuarioRegistrado);
-
-      System.out.println("Usuario registrado correctamente: " + datos.get("tipoUsuario"));
-
+      System.out.println("Has cerrado sesion correctamente");
    }
 
    public void addPreferenciaArtistica(String preferenciaArtistica, int nivel) {
@@ -145,6 +125,7 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
       }
       return "Instructor no encontrado";
    }
+
    public String getParticipante(String email) {
       Iterator<Usuario> iterator = usuarios.iterator();
 
@@ -257,9 +238,7 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
             return true;
          }
       }
-
       return false;
    }
-
 
 }

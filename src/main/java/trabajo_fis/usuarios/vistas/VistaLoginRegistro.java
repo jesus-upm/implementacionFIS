@@ -41,29 +41,29 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
       Scanner sc = new Scanner(System.in);
 
       HashMap<String, String> datos = new HashMap<>();
-      System.out.println("=== REGISTRO DE USUARIO ===");
-      System.out.println("Seleccione tipo de usuario:");
-      System.out.println("1. Participante Externo");
-      System.out.println("2. Estudiante UPM");
-      System.out.println("3. Personal UPM");
 
       do {
-         int opcion = -1;
+         System.out.println("=== REGISTRO DE USUARIO ===");
+         System.out.println("Seleccione tipo de usuario:");
+         System.out.println("1. Participante Externo");
+         System.out.println("2. Estudiante UPM");
+         System.out.println("3. Personal UPM");
+         String opcion = "";
 
-         while (opcion==-1) {
+         while (opcion=="") {
             System.out.print("Introduce el número de la opción que quieras: ");
-            opcion = sc.nextInt();
+            opcion = sc.next();
          }
 
 
          switch (opcion) {
-            case 1:
+            case "1":
                datos.put("tipoUsuario", "ParticipanteExterno");
                break;
-            case 2:
+            case "2":
                datos.put("tipoUsuario", "EstudianteUPM");
                break;
-            case 3:
+            case "3":
                datos.put("tipoUsuario", "PersonalUPM");
                break;
             default:
@@ -90,15 +90,15 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
       datos.put("nombreCompleto", sc.nextLine());
 
       boolean correoCorrecto = false;
-      String correo = null, mensajeCorreo = "Correo electrónico: ";
+      String correo = null, mensajeCorreo = "Correo electrónico (@upm.es): ";
       while (!correoCorrecto) {
          System.out.print(mensajeCorreo);
          correo = sc.nextLine();
-         if (correo.trim().endsWith("@upm.es")) {
+         if ((datos.get("tipoUsuario").equals("PersonalUPM") || datos.get("tipoUsuario").equals("EstudianteUPM")) && !correo.trim().endsWith("@upm.es")) {
+            mensajeCorreo = "Introduce un correo del dominio UPM: ";
+         } else {
             datos.put("correoElectronico", correo);
             correoCorrecto = true;
-         } else {
-            mensajeCorreo = "Introduce un correo del dominio UPM: ";
          }
       }
 
@@ -113,7 +113,7 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
             datos.put("contrasena", psswd);
             contraValida = true;
          } else {
-            mensajePass = "Prueba a introducir una contraseña valido (Debe tener 12 carácteres min, entre ellas una minúscula, una mayúscula y un número)";
+            mensajePass = "Prueba a introducir una contraseña valida (Debe tener 12 carácteres min, entre ellas una minúscula, una mayúscula y un número)";
          }
       }
 
