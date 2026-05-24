@@ -199,7 +199,7 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
             }
          }
 
-         String tarjetaExternoMensaje = "Tarjeta bancaria: ";
+         String tarjetaExternoMensaje = "Tarjeta bancaria de 16 dígitos: ";
          boolean tarjetaExternoCorrecto = false;
          while (!tarjetaExternoCorrecto) {
             System.out.print(tarjetaExternoMensaje);

@@ -54,3 +54,5 @@ tipoUsuario;PersonalUPM;nickUsuario;Personal;nombreCompleto;PersonalUPM;correoEl
 tipoUsuario;ParticipanteExterno;nickUsuario;partE;nombreCompleto;ParticipanteExterno;correoElectronico;participanteexterno@gmail.com;contrasena;$2a$10$K9Y39cbWw8/uACucCC2Ho.oqGl11egMGJ/syjPBcncSnysh0Tu6wq;DNI;12345678X;tarjetaBancaria;123456789
 tipoUsuario;EstudianteUPM;nickUsuario;Anuel;nombreCompleto;Anuel Cortes;correoElectronico;anuel@alumnos.upm.es;contrasena;$2a$10$jJdD.Q6y.8UsQud86A1S0uwATpgyvFX3nDvK2nQOZsGNd9rAkDJR.;DNI;02778255Q;tarjetaBancaria;2323232323232323;numMatricula;bv0199
 tipoUsuario;PersonalUPM;nickUsuario;tainy;nombreCompleto;tainy lol;correoElectronico;tainy@upm.es;contrasena;$2a$10$cuYtsjK90YLb0EvNZ091AurcpAM4zgMskw6tetYW84P/DrS5g1Mpu;DNI;98765411S;tarjetaBancaria;3434343434343434;fechaAntiguedad;2004-12-12;esPDI;true
+
+
