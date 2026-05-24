@@ -1,5 +1,6 @@
 package trabajo_fis.usuarios.vistas;
 
+import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -23,7 +24,7 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
       System.out.print("Contraseña: ");
       String contrasena = scanner.nextLine();
       if(autenticable.iniciarSesion(email,contrasena)){
-         System.out.println("Se inico sesion correctamente");
+         System.out.println("Se inició sesión correctamente");
       }
       else {
          System.out.println("Error al iniciar sesion contraseña/correro invalido");
@@ -54,78 +55,164 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
          }
 
          // Datos del LDAP metidos igual que si los hubiera escrito el usuario
-         System.out.println("Introduce tu nick: ");
-         String nickUsuario = sc.nextLine();
-         datos.put("nickUsuario", nickUsuario);
+         boolean nickCorrecto = false;
+         String nickMensaje = "Introduce tu nick (entre 4 y 12 caracteres): ";
+         while (!nickCorrecto) {
+            System.out.print(nickMensaje);
+            String nickUsuario = sc.nextLine();
+            if (nickUsuario.length() >= 4 && nickUsuario.length() <= 12) {
+               datos.put("nickUsuario", nickUsuario);
+               nickCorrecto = true;
+            } else {
+               nickMensaje = "Introduce un nick correcto (entre 4 y 12 caracteres): ";
+            }
+         }
          // getId() es el nick
-         System.out.println("Introduce tu nombreCompleto: ");
+         System.out.print("Introduce tu nombre completo: ");
          String nombreCompleto = sc.nextLine();
          datos.put("nombreCompleto", nombreCompleto);
-
          datos.put("correoElectronico", userData.getEmail());
 
-         System.out.println("Introduce la contrasena (min 12 caracteres, 1 mayuscula ,1 minuscula y 1 numero)");
-         String contraseña = sc.nextLine();
-         datos.put("contrasena", contraseña);
+         String mensajeContrasena = "Introduce la contraseña (min. 12 caracteres, 1 mayúscula ,1 minúscula y 1 número): ";
+         boolean contrasenaCorrecta = false;
+         while (!contrasenaCorrecta) {
+            System.out.print(mensajeContrasena);
+            String contrasena = sc.nextLine();
+            if (contrasena.length() >= 12 && contrasena.chars().anyMatch(Character::isDigit) && contrasena.chars().anyMatch(Character::isUpperCase) && contrasena.chars().anyMatch(Character::isLowerCase)) {
+               datos.put("contrasena", contrasena);
+               contrasenaCorrecta = true;
+            } else {
+               mensajeContrasena = "Introduce de nuevo una contraseña que cumpla los requisitos indicados (min. 12 caracteres, 1 mayúscula ,1 minúscula y 1 número): ";
+            }
+         }
 
-         System.out.println("Introduce tu DNI: ");
-         String dni = sc.nextLine();
-         datos.put("DNI", dni);
+         String mensajeDNI = "Introduce tu DNI: ";
+         boolean dniCorrecto = false;
+         while (!dniCorrecto) {
+            System.out.print(mensajeDNI);
+            String dni = sc.nextLine();
+            if (dni.length() == 9 && dni.chars().limit(8).allMatch(Character::isDigit) && Character.isLetter(dni.charAt(8))) {
+               datos.put("DNI", dni);
+               dniCorrecto = true;
+            } else {
+               mensajeDNI = "Introduce un DNI en formato correcto: ";
+            }
+         }
 
-         System.out.print("Tarjeta bancaria: ");
-         datos.put("tarjetaBancaria", sc.nextLine());
+         String tarjetaMensaje = "Tarjeta bancaria de 16 dígitos: ";
+         boolean tarjetaCorrecta = false;
+         while (!tarjetaCorrecta) {
+            System.out.print(tarjetaMensaje);
+            String tarjeta = sc.nextLine();
+            if (tarjeta.length() == 16 && tarjeta.chars().allMatch(Character::isDigit)) {
+               datos.put("tarjetaBancaria", tarjeta);
+               tarjetaCorrecta = true;
+            } else {
+               tarjetaMensaje = "Formato de tarjeta inválido. Prueba de nuevo: ";
+            }
+         }
 
-
-         // Datos específicos según el rol que devuelve el LDAP
-         String tipo = userData.getRol().toString();
-         if (tipo.equals("ALUMNO")) {
+         String correoIntroducido = userData.getEmail();
+         if (correoIntroducido.endsWith("@alumnos.upm.es")) {
             datos.put("tipoUsuario","EstudianteUPM");
-
+            datos.put("esPDI","false");
             System.out.print("Número de matrícula: ");
             datos.put("numMatricula", sc.nextLine());
 
-
-         } else {
+         } else if (correoIntroducido.endsWith("@upm.es")){
             datos.put("tipoUsuario","PersonalUPM");
+            datos.put("esPDI","true");
 
-
-            System.out.print("Fecha de antigüedad (yyyy-MM-dd): ");
-            String fechaStr = sc.nextLine().trim();
-            datos.put("fechaAntiguedad", fechaStr);
-
-            if(tipo.equals("PDI")){
-               datos.put("esPDI","true");
+            String mensajeFecha = "Fecha de antigüedad (yyyy-MM-dd): ";
+            boolean fechaCorrecta = false;
+            while (!fechaCorrecta) {
+               System.out.print(mensajeFecha);
+               String fechaStr = sc.nextLine().trim();
+               try {
+                  LocalDate.parse(fechaStr);
+                  fechaCorrecta = true;
+                  datos.put("fechaAntiguedad", fechaStr);
+               } catch (Exception e ){
+                  mensajeFecha = "Introduce un formato de fecha correcto: ";
+               }
             }
-            else {
-               datos.put("esPDI","false");
-            }
-
          }
 
       } else {
          datos.put("tipoUsuario","ParticipanteExterno");
-
-         System.out.print("Nick usuario (entre 4 y 12 caracteres): ");
-         datos.put("nickUsuario", sc.nextLine());
+         String nickExternoMensaje = "Nick usuario (entre 4 y 12 caracteres): ";
+         boolean externoNickCorrecto = false;
+         while (!externoNickCorrecto) {
+            System.out.print(nickExternoMensaje);
+            String externoNick = sc.nextLine();
+            if (externoNick.length() >= 4 && externoNick.length() <= 12) {
+               datos.put("nickUsuario", externoNick);
+               externoNickCorrecto = true;
+            } else {
+               nickExternoMensaje = "Introduce un nick que cumpla los requisitos (entre 4 y 12 caracteres): ";
+            }
+         }
 
          System.out.print("Nombre completo: ");
          datos.put("nombreCompleto", sc.nextLine());
 
-         System.out.print("Correo electrónico: ");
-         datos.put("correoElectronico", sc.nextLine());
+         String mensajeExternoCorreo = "Correo electrónico: ";
+         boolean correoExternoCorrecto = false;
+         while (!correoExternoCorrecto) {
+            System.out.print(mensajeExternoCorreo);
+            String correoExterno = sc.nextLine();
+            if (correoExterno.matches("[^@]+@[^@]+\\.(com|es)") && !correoExterno.endsWith("@upm.es")) {
+               datos.put("correoElectronico", correoExterno);
+               correoExternoCorrecto = true;
+            } else {
+               if (correoExterno.endsWith("@upm.es")) {
+                  mensajeExternoCorreo = "No puedes registrarte con un correo de la UPM como usuario externo. Inténtalño de nuevo: ";
+               } else {
+                  mensajeExternoCorreo = "Introduce un formato de correo electrónico correcto: ";
+               }
+            }
+         }
 
-         System.out.print("Contrasena (min 12 caracteres, 1 mayuscula ,1 minuscula y 1 numero): ");
-         datos.put("contrasena", sc.nextLine());
+         String contrasenaExternoMensaje = "Contrasena (min 12 caracteres, 1 mayuscula ,1 minuscula y 1 numero): ";
+         boolean contrasenaExternoCorrecto = false;
+         while (!contrasenaExternoCorrecto) {
+            System.out.print(contrasenaExternoMensaje);
+            String contraExterno = sc.nextLine();
+            if (contraExterno.length() >= 12 && contraExterno.chars().anyMatch(Character::isDigit) && contraExterno.chars().anyMatch(Character::isUpperCase) && contraExterno.chars().anyMatch(Character::isLowerCase)) {
+               datos.put("contrasena", contraExterno);
+               contrasenaExternoCorrecto = true;
+            } else {
+               contrasenaExternoMensaje = "Introduce una contraseña válida (min 12 caracteres, 1 mayuscula ,1 minuscula y 1 numero): ";
+            }
+         }
 
-         System.out.print("DNI: ");
-         datos.put("DNI", sc.nextLine());
+         String dniExternoMensaje = "DNI: ";
+         boolean dniExternoCorrecto = false;
+         while (!dniExternoCorrecto) {
+            System.out.print(dniExternoMensaje);
+            String dniExterno = sc.nextLine();
+            if (dniExterno.length() == 9 && dniExterno.chars().limit(8).allMatch(Character::isDigit) && Character.isLetter(dniExterno.charAt(8))) {
+               datos.put("DNI", dniExterno);
+               dniExternoCorrecto = true;
+            } else {
+               dniExternoMensaje = "Introduce un DNI válido";
+            }
+         }
 
-
-         System.out.print("Tarjeta bancaria: ");
-         datos.put("tarjetaBancaria", sc.nextLine());
+         String tarjetaExternoMensaje = "Tarjeta bancaria: ";
+         boolean tarjetaExternoCorrecto = false;
+         while (!tarjetaExternoCorrecto) {
+            System.out.print(tarjetaExternoMensaje);
+            String tarjetaExterno = sc.nextLine();
+            if (tarjetaExterno.length() == 16 && tarjetaExterno.chars().allMatch(Character::isDigit)) {
+               datos.put("tarjetaBancaria", tarjetaExterno);
+               tarjetaExternoCorrecto = true;
+            } else {
+               tarjetaExternoMensaje = "Introduce una tarjeta bancaria correcta: ";
+            }
+         }
 
       }
-
       autenticable.registrarse(datos);
    }
 }
