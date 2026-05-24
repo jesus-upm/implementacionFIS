@@ -2,9 +2,11 @@ package trabajo_fis.usuarios.vistas;
 
 import java.util.HashMap;
 import java.util.Scanner;
+
+import servidor.IUPMUserData;
 import trabajo_fis.usuarios.logica.IAutenticable;
 import trabajo_fis.usuarios.factory.ICreadorUsuario;
-import servidor.*;
+import servidor.ExternalLDAP;
 
 public class VistaLoginRegistro implements IVistaLoginRegistro {
    private IAutenticable autenticable;
@@ -16,30 +18,26 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
    @Override
    public void iniciarSesion() {
       IUPMUserData userData = ExternalLDAP.LoginLDAP();
-      if (userData == null) {
-         System.out.println("Ocurrió un error al iniciar sesión");
-      } else {
-         System.out.println(userData.getEmail());
-         System.out.println(userData.getRol());
-      }
-      /*
+      String email = "";
+      if (userData != null) email = userData.getEmail();
+      Scanner scanner = new Scanner(System.in);
+      System.out.println("Introduce tu contraseña:");
+      String contrasena = scanner.nextLine();
       if (autenticable.iniciarSesion(email, contrasena)) {
          System.out.println("Ya has iniciado sesión.");
-
       } else {
-         System.out.println("Correo electrónico o contraseña incorrectos.");
+         System.out.println("Correo o contraseña incorrectos");
       }
-      */
    }
 
    @Override
    public void registrarse(ICreadorUsuario factoria) {
-      Scanner sc = new Scanner(System.in);
-
       HashMap<String, String> datos = new HashMap<>();
-
+      System.out.println("=== INICIO DE REGISTRO DE USUARIO ===");
+      IUPMUserData userData = ExternalLDAP.LoginLDAP();
+      if (userData != null) datos.put("correoElectronico", userData.getEmail());
+      Scanner sc = new Scanner(System.in);
       do {
-         System.out.println("=== REGISTRO DE USUARIO ===");
          System.out.println("Seleccione tipo de usuario:");
          System.out.println("1. Participante Externo");
          System.out.println("2. Estudiante UPM");
@@ -85,36 +83,24 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
       System.out.print("Nombre completo: ");
       datos.put("nombreCompleto", sc.nextLine());
 
-      boolean correoCorrecto = false;
-      String correo = null, mensajeCorreo = "Correo electrónico (@upm.es): ";
-      while (!correoCorrecto) {
-         System.out.print(mensajeCorreo);
-         correo = sc.nextLine();
-         if ((datos.get("tipoUsuario").equals("PersonalUPM") || datos.get("tipoUsuario").equals("EstudianteUPM")) && !correo.trim().endsWith("@upm.es")) {
-            mensajeCorreo = "Introduce un correo del dominio UPM: ";
-         } else {
-            datos.put("correoElectronico", correo);
-            correoCorrecto = true;
-         }
-      }
-
+      Scanner debugScanner = new Scanner(System.in);
       boolean contraValida = false;
       String psswd = null, mensajePass = "Contraseña(Debe tener 12 carácteres min, entre ellas una minúscula, una mayúscula y un número): ";
       while (!contraValida) {
          System.out.print(mensajePass);
-         psswd = sc.nextLine();
+         psswd = debugScanner.nextLine();
          if (psswd.length() >= 12 && psswd.chars().anyMatch(Character::isLowerCase) && psswd.chars().anyMatch(Character::isUpperCase)
             && psswd.chars().anyMatch(Character::isDigit)
          ) {
             datos.put("contrasena", psswd);
             contraValida = true;
          } else {
-            mensajePass = "Prueba a introducir una contraseña valida (Debe tener 12 carácteres min, entre ellas una minúscula, una mayúscula y un número)";
+            mensajePass = "Prueba a introducir una contraseña valida (Debe tener 12 carácteres min, entre ellas una minúscula, una mayúscula y un número): ";
          }
       }
 
       System.out.print("DNI: ");
-      datos.put("DNI", sc.nextLine());
+      datos.put("DNI", debugScanner.nextLine());
 
       // Datos específicos
       String tipo = datos.get("tipoUsuario");
@@ -122,26 +108,26 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
       if (tipo.equals("ParticipanteExterno")) {
 
          System.out.print("Tarjeta bancaria: ");
-         datos.put("tarjetaBancaria", sc.nextLine());
+         datos.put("tarjetaBancaria", debugScanner.nextLine());
 
       } else if (tipo.equals("EstudianteUPM")) {
 
          System.out.print("Tarjeta bancaria: ");
-         datos.put("tarjetaBancaria", sc.nextLine());
+         datos.put("tarjetaBancaria", debugScanner.nextLine());
 
          System.out.print("Número de matrícula: ");
-         datos.put("numMatricula", sc.nextLine());
+         datos.put("numMatricula", debugScanner.nextLine());
 
       } else if (tipo.equals("PersonalUPM")) {
 
          System.out.print("Tarjeta bancaria: ");
-         datos.put("tarjetaBancaria", sc.nextLine());
+         datos.put("tarjetaBancaria", debugScanner.nextLine());
 
          System.out.print("Fecha de antigüedad (yyyy-mm-dd): ");
-         datos.put("fechaAntiguedad", sc.nextLine());
+         datos.put("fechaAntiguedad", debugScanner.nextLine());
 
          System.out.print("¿Es PDI? (true/false): ");
-         datos.put("esPDI", sc.nextLine());
+         datos.put("esPDI", debugScanner.nextLine());
       }
 
       autenticable.registrarse(datos);
