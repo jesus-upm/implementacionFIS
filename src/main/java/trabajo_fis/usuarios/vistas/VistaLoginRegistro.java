@@ -36,7 +36,7 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
 
       HashMap<String, String> datos = new HashMap<>();
 
-// === SELECCIÓN DE MÉTODO DE REGISTRO ===
+//  SELECCIÓN DE METODO DE REGISTRO
       System.out.println("=== REGISTRO DE USUARIO ===");
       System.out.println("¿Cómo quieres registrarte?");
       System.out.println("1. Con cuenta IUPM");
@@ -76,8 +76,6 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
          datos.put("tarjetaBancaria", sc.nextLine());
 
 
-
-
          // Datos específicos según el rol que devuelve el LDAP
          String tipo = userData.getRol().toString();
          if (tipo.equals("ALUMNO")) {
@@ -85,9 +83,6 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
 
             System.out.print("Número de matrícula: ");
             datos.put("numMatricula", sc.nextLine());
-
-
-
 
 
          } else {

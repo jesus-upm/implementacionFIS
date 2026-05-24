@@ -14,7 +14,6 @@ import java.util.List;
 
 import org.mindrot.jbcrypt.BCrypt;
 import trabajo_fis.usuarios.dominio.*;
-import trabajo_fis.usuarios.dominio.PreferenciaArtistica;
 import trabajo_fis.usuarios.dominio.Usuario;
 import trabajo_fis.usuarios.factory.ICreadorUsuario;
 import trabajo_fis.usuarios.persistencia.IPersistenciaUsuarios;
@@ -166,12 +165,10 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
 
       nick = nick.toLowerCase().trim();
 
-      // reglas básicas
       if (nick.length() < 4 || nick.length() > 12) return false;
 
       if (!nick.matches("^[a-zA-Z0-9]+$")) return false;
 
-      // blacklist (tu archivo)
       if (blacklist.contains(nick)) return false;
 
       return true;

@@ -1,4 +1,3 @@
-// create administrador class that extends Usuario
 package trabajo_fis.usuarios.dominio;
 public class Administrador extends Usuario {
    private String numeroTelefono;

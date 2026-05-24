@@ -1,11 +1,8 @@
 package trabajo_fis.usuarios.vistas;
 
-import trabajo_fis.usuarios.dominio.PreferenciaArtistica;
-import trabajo_fis.usuarios.dominio.TipoDisciplina;
 import trabajo_fis.usuarios.logica.IControladorUsuario;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Scanner;
 
 public class VistaUsuarios implements IVistaUsuarios {

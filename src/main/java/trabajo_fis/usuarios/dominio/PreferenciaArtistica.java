@@ -4,7 +4,6 @@ public class PreferenciaArtistica {
     private TipoDisciplina tipo;
     private int nivelExperiencia;
 
-    // Constructor
     public PreferenciaArtistica(TipoDisciplina nombre, int nivelExperiencia) {
         this.tipo = nombre;
         this.nivelExperiencia = nivelExperiencia;
