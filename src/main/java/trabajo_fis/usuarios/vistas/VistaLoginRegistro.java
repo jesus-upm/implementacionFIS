@@ -32,7 +32,7 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
    }
 
    @Override
-   public void registrarse(ICreadorUsuario factoria) {
+   public void registrarse() {
       Scanner sc = new Scanner(System.in);
 
       HashMap<String, String> datos = new HashMap<>();

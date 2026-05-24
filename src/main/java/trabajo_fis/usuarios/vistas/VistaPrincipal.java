@@ -52,7 +52,7 @@ public class VistaPrincipal {
 
 			}else if (inputUsuario.equals("2")) {
 
-				iVistaLoginRegistro.registrarse(iCreadorUsuarios);
+				iVistaLoginRegistro.registrarse();
 
 			} else {
 				System.out.println("Opción no válida");
