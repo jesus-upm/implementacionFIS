@@ -12,12 +12,11 @@ public class VistaPrincipal {
 	private IObtenerSesion sesionActual;
 	private IVistaLoginRegistro iVistaLoginRegistro;
 	private IVistaUsuarios iVistaUsuarios;
-	private ICreadorUsuario iCreadorUsuarios;
 
 
-	public VistaPrincipal(IControladorUsuario controladorUsuario, IAutenticable autenticable, IObtenerSesion obtenerSesion, ICreadorUsuario creadorUsuario) {
+
+	public VistaPrincipal(IControladorUsuario controladorUsuario, IAutenticable autenticable, IObtenerSesion obtenerSesion) {
 			this.iVistaLoginRegistro = new VistaLoginRegistro(autenticable);
-			this.iCreadorUsuarios =creadorUsuario;
 			this.sesionActual = obtenerSesion;
 			this.iVistaUsuarios = new VistaUsuarios(controladorUsuario);
 		}

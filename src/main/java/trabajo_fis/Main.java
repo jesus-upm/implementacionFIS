@@ -10,7 +10,7 @@ public class Main {
 		javax.swing.SwingUtilities.invokeLater(() -> {
 			CreadorUsuario creadorUsuario = new CreadorUsuario();
 			ControladorUsuario controladorUsuario = new ControladorUsuario(creadorUsuario, new PersistenciaUsuarios(creadorUsuario));
-			new VistaPrincipal(controladorUsuario, controladorUsuario, controladorUsuario, creadorUsuario).iniciar();
+			new VistaPrincipal(controladorUsuario, controladorUsuario, controladorUsuario).iniciar();
 		});
 	}
 }
