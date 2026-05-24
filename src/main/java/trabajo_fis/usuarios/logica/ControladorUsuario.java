@@ -4,6 +4,9 @@ import java.io.BufferedReader;
 
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -218,6 +221,15 @@ public class ControladorUsuario implements IControladorUsuario, IAutenticable, I
       if (datos.get("DNI") == null || datos.get("DNI").isEmpty()) {
          System.out.println("Error: DNI inválido");
          return null;
+      }
+      if(datos.get("tipoUsuario").equals("PersonalUPM")){
+         try {
+            LocalDate fecha = LocalDate.parse(datos.get("fechaAntiguedad").trim(), DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+
+         } catch (DateTimeParseException e) {
+            System.out.println("Formato de fecha incorrecto. Usa el formato: yyyy-MM-dd");
+            return null;
+         }
       }
 
       String contrasenaHash = BCrypt.hashpw(datos.get("contrasena"), BCrypt.gensalt());

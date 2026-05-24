@@ -44,7 +44,7 @@ public class CreadorUsuario implements ICreadorUsuario {
                     datos.get("contrasena"),
                     datos.get("DNI"),
                     datos.get("tarjetaBancaria"),
-                    LocalDate.parse(datos.get("fechaAntiguedad"), DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                    LocalDate.parse(datos.get("fechaAntiguedad").trim(), DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                     Boolean.parseBoolean(datos.get("esPDI"))
             );
             case "Administrador" -> new Administrador(

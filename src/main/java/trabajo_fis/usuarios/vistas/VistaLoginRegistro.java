@@ -17,117 +17,119 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
 
    @Override
    public void iniciarSesion() {
-      IUPMUserData userData = ExternalLDAP.LoginLDAP();
-      String email = "";
-      if (userData != null) email = userData.getEmail();
       Scanner scanner = new Scanner(System.in);
-      System.out.println("Introduce tu contraseña:");
+      System.out.print("Correo electrónico: ");
+      String email = scanner.nextLine();
+      System.out.print("Contraseña: ");
       String contrasena = scanner.nextLine();
-      if (autenticable.iniciarSesion(email, contrasena)) {
-         System.out.println("Ya has iniciado sesión.");
-      } else {
-         System.out.println("Correo o contraseña incorrectos");
+      if(autenticable.iniciarSesion(email,contrasena)){
+         System.out.println("Se inico sesion correctamente");
+      }
+      else {
+         System.out.println("Error al iniciar sesion contraseña/correro invalido");
       }
    }
 
    @Override
    public void registrarse(ICreadorUsuario factoria) {
-      HashMap<String, String> datos = new HashMap<>();
-      System.out.println("=== INICIO DE REGISTRO DE USUARIO ===");
-      IUPMUserData userData = ExternalLDAP.LoginLDAP();
-      if (userData != null) datos.put("correoElectronico", userData.getEmail());
       Scanner sc = new Scanner(System.in);
-      do {
-         System.out.println("Seleccione tipo de usuario:");
-         System.out.println("1. Participante Externo");
-         System.out.println("2. Estudiante UPM");
-         System.out.println("3. Personal UPM");
-         String opcion = "";
 
-         while (opcion=="") {
-            System.out.print("Introduce el número de la opción que quieras: ");
-            opcion = sc.next();
+      HashMap<String, String> datos = new HashMap<>();
+
+// === SELECCIÓN DE MÉTODO DE REGISTRO ===
+      System.out.println("=== REGISTRO DE USUARIO ===");
+      System.out.println("¿Cómo quieres registrarte?");
+      System.out.println("1. Con cuenta IUPM");
+      System.out.println("2. Sin cuenta IUPM");
+      System.out.print("Elige una opción (1/2): ");
+      String metodo = sc.nextLine().trim();
+
+      if (metodo.equals("1")) {
+
+         IUPMUserData userData = ExternalLDAP.LoginLDAP();
+
+         if (userData == null) {
+            System.out.println("Error: credenciales IUPM incorrectas.");
+            return;
          }
 
+         // Datos del LDAP metidos igual que si los hubiera escrito el usuario
+         System.out.println("Introduce tu nick: ");
+         String nickUsuario = sc.nextLine();
+         datos.put("nickUsuario", nickUsuario);
+         // getId() es el nick
+         System.out.println("Introduce tu nombreCompleto: ");
+         String nombreCompleto = sc.nextLine();
+         datos.put("nombreCompleto", nombreCompleto);
 
-         switch (opcion) {
-            case "1":
-               datos.put("tipoUsuario", "ParticipanteExterno");
-               break;
-            case "2":
-               datos.put("tipoUsuario", "EstudianteUPM");
-               break;
-            case "3":
-               datos.put("tipoUsuario", "PersonalUPM");
-               break;
-            default:
-               System.out.println("Opción inválida");
-         }
-      } while (datos.isEmpty());
+         datos.put("correoElectronico", userData.getEmail());
 
-      // Datos comunes
-      boolean condicionDeFin = false;
-      String nickUser = null, mensajeNick = "Nick usuario (entre 4 y 12 caracteres): ";
-      sc.nextLine(); // Limpieza de buffer
-      while (!condicionDeFin) {
-         System.out.print(mensajeNick);
-         nickUser = sc.nextLine();
-         if (nickUser.length() >= 4 && nickUser.length() <= 12) {
-            datos.put("nickUsuario", nickUser);
-            condicionDeFin = true;
+         System.out.println("Introduce la contrasena (min 12 caracteres, 1 mayuscula ,1 minuscula y 1 numero)");
+         String contraseña = sc.nextLine();
+         datos.put("contrasena", contraseña);
+
+         System.out.println("Introduce tu DNI: ");
+         String dni = sc.nextLine();
+         datos.put("DNI", dni);
+
+         System.out.print("Tarjeta bancaria: ");
+         datos.put("tarjetaBancaria", sc.nextLine());
+
+
+
+
+         // Datos específicos según el rol que devuelve el LDAP
+         String tipo = userData.getRol().toString();
+         if (tipo.equals("ALUMNO")) {
+            datos.put("tipoUsuario","EstudianteUPM");
+
+            System.out.print("Número de matrícula: ");
+            datos.put("numMatricula", sc.nextLine());
+
+
+
+
+
          } else {
-            mensajeNick = "Introduce un nick de usuario válido (entre 4 y 12 caracteres): ";
+            datos.put("tipoUsuario","PersonalUPM");
+
+
+            System.out.print("Fecha de antigüedad (yyyy-MM-dd): ");
+            String fechaStr = sc.nextLine().trim();
+            datos.put("fechaAntiguedad", fechaStr);
+
+            if(tipo.equals("PDI")){
+               datos.put("esPDI","true");
+            }
+            else {
+               datos.put("esPDI","false");
+            }
+
          }
-      }
 
-      System.out.print("Nombre completo: ");
-      datos.put("nombreCompleto", sc.nextLine());
+      } else {
+         sc.nextLine();
+         datos.put("tipo","ParticipanteExterno");
 
-      Scanner debugScanner = new Scanner(System.in);
-      boolean contraValida = false;
-      String psswd = null, mensajePass = "Contraseña(Debe tener 12 carácteres min, entre ellas una minúscula, una mayúscula y un número): ";
-      while (!contraValida) {
-         System.out.print(mensajePass);
-         psswd = debugScanner.nextLine();
-         if (psswd.length() >= 12 && psswd.chars().anyMatch(Character::isLowerCase) && psswd.chars().anyMatch(Character::isUpperCase)
-            && psswd.chars().anyMatch(Character::isDigit)
-         ) {
-            datos.put("contrasena", psswd);
-            contraValida = true;
-         } else {
-            mensajePass = "Prueba a introducir una contraseña valida (Debe tener 12 carácteres min, entre ellas una minúscula, una mayúscula y un número): ";
-         }
-      }
+         System.out.print("Nick usuario: ");
+         datos.put("nickUsuario", sc.nextLine());
 
-      System.out.print("DNI: ");
-      datos.put("DNI", debugScanner.nextLine());
+         System.out.print("Nombre completo: ");
+         datos.put("nombreCompleto", sc.nextLine());
 
-      // Datos específicos
-      String tipo = datos.get("tipoUsuario");
+         System.out.print("Correo electrónico: ");
+         datos.put("correoElectronico", sc.nextLine());
 
-      if (tipo.equals("ParticipanteExterno")) {
+         System.out.print("Contrasena (min 12 caracteres, 1 mayuscula ,1 minuscula y 1 numero): ");
+         datos.put("contrasena", sc.nextLine());
+
+         System.out.print("DNI: ");
+         datos.put("DNI", sc.nextLine());
+
 
          System.out.print("Tarjeta bancaria: ");
-         datos.put("tarjetaBancaria", debugScanner.nextLine());
+         datos.put("tarjetaBancaria", sc.nextLine());
 
-      } else if (tipo.equals("EstudianteUPM")) {
-
-         System.out.print("Tarjeta bancaria: ");
-         datos.put("tarjetaBancaria", debugScanner.nextLine());
-
-         System.out.print("Número de matrícula: ");
-         datos.put("numMatricula", debugScanner.nextLine());
-
-      } else if (tipo.equals("PersonalUPM")) {
-
-         System.out.print("Tarjeta bancaria: ");
-         datos.put("tarjetaBancaria", debugScanner.nextLine());
-
-         System.out.print("Fecha de antigüedad (yyyy-mm-dd): ");
-         datos.put("fechaAntiguedad", debugScanner.nextLine());
-
-         System.out.print("¿Es PDI? (true/false): ");
-         datos.put("esPDI", debugScanner.nextLine());
       }
 
       autenticable.registrarse(datos);
