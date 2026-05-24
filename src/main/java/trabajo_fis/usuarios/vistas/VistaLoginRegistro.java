@@ -108,8 +108,7 @@ public class VistaLoginRegistro implements IVistaLoginRegistro {
          }
 
       } else {
-         sc.nextLine();
-         datos.put("tipo","ParticipanteExterno");
+         datos.put("tipoUsuario","ParticipanteExterno");
 
          System.out.print("Nick usuario: ");
          datos.put("nickUsuario", sc.nextLine());
